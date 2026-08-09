@@ -6,16 +6,16 @@
     <title>DASHBOARDMASPEWW - Private Finance</title>
     <style>
         :root {
-            --bg-main: #0a0e17;
-            --bg-card: #131b2e;
-            --bg-input: #1a233a;
-            --border-color: #2a3655;
+            --bg-main: #07090e;
+            --bg-card: #0f172a;
+            --bg-input: #1e293b;
+            --border-color: #334155;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --accent-blue: #3b82f6;
-            --accent-green: #10b981;
-            --accent-red: #ef4444;
-            --accent-gold: #f59e0b;
+            --accent-blue: #2563eb;
+            --accent-green: #059669;
+            --accent-red: #dc2626;
+            --accent-gold: #d97706;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
@@ -28,9 +28,9 @@
         }
         .login-box {
             width: 380px; background: var(--bg-card); padding: 40px; border-radius: 16px;
-            border: 1px solid var(--border-color); box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            border: 1px solid var(--border-color); box-shadow: 0 25px 50px rgba(0,0,0,0.7);
         }
-        .login-box h2 { font-size: 24px; font-weight: 800; color: var(--text-main); text-align: center; margin-bottom: 6px; letter-spacing: 0.5px; }
+        .login-box h2 { font-size: 24px; font-weight: 900; color: var(--text-main); text-align: center; margin-bottom: 6px; letter-spacing: 0.5px; }
         .login-box p { font-size: 13px; color: var(--text-muted); margin-bottom: 24px; text-align: center; }
         .input-group { margin-bottom: 16px; display: flex; flex-direction: column; }
         .input-group label { font-size: 11px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; font-weight: 700; letter-spacing: 0.5px; }
@@ -44,11 +44,11 @@
             border-radius: 8px; color: white; font-weight: 700; cursor: pointer; margin-top: 10px; font-size: 14px;
             transition: background 0.2s;
         }
-        .btn-primary:hover { background: #2563eb; }
+        .btn-primary:hover { background: #1d4ed8; }
         .error-msg { color: var(--accent-red); font-size: 12px; text-align: center; margin-top: 12px; display: none; }
 
         /* DASHBOARD LAYOUT */
-        #appWrapper { display: none; width: 100vw; height: 100vh; display: none; }
+        #appWrapper { display: none; width: 100vw; height: 100vh; }
         .sidebar {
             width: 260px; background: var(--bg-card); border-right: 1px solid var(--border-color);
             display: flex; flex-direction: column; justify-content: space-between; padding: 24px;
@@ -91,22 +91,20 @@
         .stats-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 24px; }
         .stat-box { background: var(--bg-card); border: 1px solid var(--border-color); padding: 18px; border-radius: 12px; }
         .stat-box p { font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; margin-bottom: 6px; }
-        .stat-box h3 { font-size: 16px; font-weight: 800; color: var(--text-main); }
+        .stat-box h3 { font-size: 15px; font-weight: 800; color: var(--text-main); }
         .stat-box.green h3 { color: var(--accent-green); }
         .stat-box.red h3 { color: var(--accent-red); }
         .stat-box.blue h3 { color: var(--accent-blue); }
         .stat-box.gold h3 { color: var(--accent-gold); }
 
-        /* CARDS & PANELS */
+        /* PANELS & TABLES */
         .panel { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 24px; margin-bottom: 24px; }
         .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
         .panel-header h3 { font-size: 15px; font-weight: 800; color: var(--text-main); }
 
-        /* FORMS & GRIDS */
         .form-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 16px; }
         .form-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 16px; }
         
-        /* TABLES */
         table { width: 100%; border-collapse: collapse; margin-top: 10px; }
         th, td { border: 1px solid var(--border-color); padding: 12px; text-align: left; font-size: 13px; }
         th { background: var(--bg-input); color: var(--text-muted); font-weight: 700; text-transform: uppercase; font-size: 11px; }
@@ -115,29 +113,27 @@
         .txt-keluar { color: var(--accent-red); font-weight: 700; }
         .txt-saldo { color: var(--accent-blue); font-weight: 700; }
 
-        /* BUTTONS */
         .btn { padding: 10px 16px; border-radius: 8px; border: none; font-weight: 700; cursor: pointer; font-size: 13px; }
         .btn-blue { background: var(--accent-blue); color: white; }
-        .btn-blue:hover { background: #2563eb; }
+        .btn-blue:hover { background: #1d4ed8; }
         .btn-green { background: var(--accent-green); color: white; }
-        .btn-green:hover { background: #059669; }
+        .btn-green:hover { background: #047857; }
         .btn-red { background: var(--accent-red); color: white; }
-        .btn-red:hover { background: #dc2626; }
+        .btn-red:hover { background: #b91c1c; }
         .btn-sm { padding: 6px 10px; font-size: 11px; border-radius: 6px; }
 
         /* MODAL BUKTI & EDIT */
-        #proofModal, #editModal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); z-index: 3000; align-items: center; justify-content: center; }
+        #proofModal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 3000; align-items: center; justify-content: center; }
         .modal-card { background: var(--bg-card); width: 450px; padding: 30px; border-radius: 12px; border: 1px solid var(--border-color); position: relative; }
         .modal-card img { max-width: 100%; max-height: 70vh; border-radius: 8px; border: 1px solid var(--border-color); display: block; margin: 0 auto; }
         .close-modal { position: absolute; top: 15px; right: 15px; background: transparent; border: none; color: var(--text-muted); font-size: 18px; cursor: pointer; font-weight: 800; }
 
-        /* UTILS */
         .flex-row { display: flex; gap: 12px; align-items: center; }
         .mb-20 { margin-bottom: 20px; }
         .badge { padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: 800; text-transform: uppercase; }
-        .badge-masuk { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); border: 1px solid var(--accent-green); }
-        .badge-keluar { background: rgba(239, 68, 68, 0.15); color: var(--accent-red); border: 1px solid var(--accent-red); }
-        .badge-gold { background: rgba(245, 158, 11, 0.15); color: var(--accent-gold); border: 1px solid var(--accent-gold); }
+        .badge-masuk { background: rgba(5, 150, 105, 0.15); color: var(--accent-green); border: 1px solid var(--accent-green); }
+        .badge-keluar { background: rgba(220, 38, 38, 0.15); color: var(--accent-red); border: 1px solid var(--accent-red); }
+        .badge-gold { background: rgba(217, 119, 6, 0.15); color: var(--accent-gold); border: 1px solid var(--accent-gold); }
 
         @media(max-width: 1200px) {
             .stats-grid { grid-template-columns: repeat(3, 1fr); }
@@ -151,7 +147,7 @@
     <div id="loginWrapper">
         <div class="login-box">
             <h2>DASHBOARDMASPEWW</h2>
-            <p>Silakan masuk ke akun keuangan pribadi Anda.</p>
+            <p>Sistem Keuangan Pribadi & Investasi Emas</p>
             <div class="input-group">
                 <label>User ID</label>
                 <input type="text" id="txtUser" placeholder="Masukkan User ID...">
@@ -167,25 +163,12 @@
 
     <!-- MAIN APP WRAPPER -->
     <div id="appWrapper">
-        <!-- MODAL PROOF / BUKTI -->
+        <!-- MODAL BUKTI TRANSFER (PROFF) -->
         <div id="proofModal" onclick="this.style.display='none'">
             <div class="modal-card" onclick="event.stopPropagation()">
                 <button class="close-modal" onclick="document.getElementById('proofModal').style.display='none'">✕</button>
-                <h3 style="margin-bottom: 15px; font-size: 15px;">Bukti Transaksi</h3>
+                <h3 style="margin-bottom: 15px; font-size: 15px;">Bukti Transaksi (Proof)</h3>
                 <img id="imgProofTarget" src="" alt="Bukti Transfer">
-            </div>
-        </div>
-
-        <!-- MODAL EDIT TRANSAKSI -->
-        <div id="editModal">
-            <div class="modal-card">
-                <button class="close-modal" onclick="tutupEditModal()">✕</button>
-                <h3 style="margin-bottom: 15px; font-size: 15px;">Edit Transaksi</h3>
-                <input type="hidden" id="editIndex">
-                <div class="input-group"><label>Tanggal</label><input type="date" id="editTgl"></div>
-                <div class="input-group"><label>Keterangan</label><input type="text" id="editKet"></div>
-                <div class="input-group"><label>Nominal (Rp)</label><input type="number" id="editNominal"></div>
-                <button class="btn-primary" onclick="simpanEditTransaksi()">Simpan Perubahan</button>
             </div>
         </div>
 
@@ -239,8 +222,8 @@
                             <h3 id="dashKeluar">Rp 0</h3>
                         </div>
                         <div class="stat-box gold">
-                            <p>Total Tabungan / Gold</p>
-                            <h3 id="dashTabungan">0 Gram / Rp 0</h3>
+                            <p>Akumulasi Total Emas</p>
+                            <h3 id="dashTabungan">0 Gram (Rp 0)</h3>
                         </div>
                         <div class="stat-box blue">
                             <p>Sisa Uang Bulan Ini</p>
@@ -261,12 +244,10 @@
                                     <th class="text-right">Pemasukan (+)</th>
                                     <th class="text-right">Pengeluaran (-)</th>
                                     <th class="text-right">Saldo Berjalan</th>
-                                    <th>Bukti</th>
+                                    <th>Bukti (Proof)</th>
                                 </tr>
                             </thead>
-                            <tbody id="dashTableBody">
-                                <!-- Data dimuat otomatis -->
-                            </tbody>
+                            <tbody id="dashTableBody"></tbody>
                         </table>
                     </div>
                 </div>
@@ -276,9 +257,9 @@
                     <div class="panel">
                         <div class="panel-header"><h3>Tambah Rekening / Dompet Baru</h3></div>
                         <div class="form-grid-4">
-                            <div class="input-group"><label>Nama Bank / Platform</label><input type="text" id="bankName" placeholder="Contoh: BCA, Mandiri, Cash"></div>
-                            <div class="input-group"><label>Nama Pemilik / Alias</label><input type="text" id="bankHolder" placeholder="Contoh: Rekening Utama"></div>
-                            <div class="input-group"><label>Nomor Rekening</label><input type="text" id="bankNumber" placeholder="Contoh: 1234567890"></div>
+                            <div class="input-group"><label>Nama Bank</label><input type="text" id="bankName" placeholder="Contoh: BCA, Mandiri"></div>
+                            <div class="input-group"><label>Nama Rekening (Alias)</label><input type="text" id="bankHolder" placeholder="Contoh: Rekening Utama"></div>
+                            <div class="input-group"><label>Nomor Rekening</label><input type="text" id="bankNumber" placeholder="Contoh: 123456781828"></div>
                             <div class="input-group"><label>Saldo Awal (Rp)</label><input type="number" id="bankBalance" placeholder="0"></div>
                         </div>
                         <button class="btn btn-blue" onclick="tambahRekening()">Tambah Rekening</button>
@@ -290,7 +271,7 @@
                             <thead>
                                 <tr>
                                     <th>Nama Bank</th>
-                                    <th>Alias Rekening</th>
+                                    <th>Nama Rekening</th>
                                     <th>Nomor Rekening</th>
                                     <th class="text-right">Saldo Saat Ini</th>
                                     <th class="text-right">Aksi</th>
@@ -312,21 +293,22 @@
                                 <select id="trJenis" onchange="updateKategoriOptions()">
                                     <option value="Masuk">Pemasukan</option>
                                     <option value="Keluar">Pengeluaran</option>
-                                    <option value="BUY GOLD">BUY GOLD (Tabungan Emas)</option>
+                                    <option value="BUY GOLD">BUY GOLD (Beli Emas)</option>
                                 </select>
                             </div>
                             <div class="input-group">
                                 <label>Kategori</label>
-                                <select id="trKategori">
-                                    <!-- Dinamis berdasarkan jenis -->
-                                </select>
+                                <select id="trKategori"></select>
                             </div>
-                            <div class="input-group"><label>Pilih Rekening Sumber/Tujuan</label><select id="trRekening"></select></div>
-                            <div class="input-group"><label>Nominal (Rp)</label><input type="number" id="trNominal" placeholder="0"></div>
-                            <div class="input-group"><label>Upload Bukti Transfer (Opsional)</label><input type="file" id="trFile" accept="image/*"></div>
+                            <div class="input-group"><label>Rekening Sumber / Tujuan</label><select id="trRekening"></select></div>
+                            <div class="input-group"><label>Nominal Pembayaran / Harga (Rp)</label><input type="number" id="trNominal" placeholder="0"></div>
+                            <div class="input-group" id="groupGram" style="display: none;"><label>Total Gram Emas</label><input type="number" step="0.01" id="trGram" placeholder="Contoh: 1.5"></div>
                         </div>
-                        <div class="input-group mb-20"><label>Keterangan / Catatan Transaksi</label><input type="text" id="trKet" placeholder="Keterangan detail transaksi..."></div>
-                        <button class="btn btn-blue" onclick="catatTransaksi()">Catat Mutasi Transaksi</button>
+                        <div class="form-grid">
+                            <div class="input-group mb-20"><label>Keterangan / Catatan</label><input type="text" id="trKet" placeholder="Keterangan detail transaksi..."></div>
+                            <div class="input-group mb-20"><label>Upload Bukti Transfer (Proof)</label><input type="file" id="trFile" accept="image/*"></div>
+                        </div>
+                        <button class="btn btn-blue" onclick="catatTransaksi()">Simpan Mutasi Transaksi</button>
                     </div>
 
                     <div class="panel">
@@ -347,7 +329,7 @@
                                     <th class="text-right">Pemasukan (+)</th>
                                     <th class="text-right">Pengeluaran (-)</th>
                                     <th class="text-right">Saldo Berjalan</th>
-                                    <th>Bukti</th>
+                                    <th>Bukti (Proof)</th>
                                     <th class="text-right">Aksi</th>
                                 </tr>
                             </thead>
@@ -360,7 +342,7 @@
                 <div id="tab-laporan" class="tab-content">
                     <div class="panel">
                         <div class="panel-header">
-                            <h3>Pilih Periode Laporan</h3>
+                            <h3>Pilih Periode Laporan Bulanan</h3>
                             <div class="flex-row">
                                 <select id="lapBulan" onchange="renderLaporan()" style="padding: 8px; background: var(--bg-input); border: 1px solid var(--border-color); color: white; border-radius: 6px;">
                                     <option value="01">Januari</option><option value="02">Februari</option><option value="03">Maret</option>
@@ -376,12 +358,12 @@
                         <div class="stats-grid" style="grid-template-columns: repeat(4, 1fr); margin-top: 15px;">
                             <div class="stat-box green"><p>Total Pemasukan</p><h3 id="lapTotalMasuk">Rp 0</h3></div>
                             <div class="stat-box red"><p>Total Pengeluaran</p><h3 id="lapTotalKeluar">Rp 0</h3></div>
-                            <div class="stat-box gold"><p>Total Tabungan / Emas</p><h3 id="lapTotalTabungan">Rp 0</h3></div>
-                            <div class="stat-box blue"><p>Sisa Uang Bersih</p><h3 id="lapSisaUang">Rp 0</h3></div>
+                            <div class="stat-box gold"><p>Total Buy Gold</p><h3 id="lapTotalTabungan">Rp 0</h3></div>
+                            <div class="stat-box blue"><p>Sisa Uang Bulan Ini</p><h3 id="lapSisaUang">Rp 0</h3></div>
                         </div>
                     </div>
                     <div class="panel">
-                        <div class="panel-header"><h3>Ringkasan Kategori Pengeluaran Bulan Ini</h3></div>
+                        <div class="panel-header"><h3>Ringkasan Kategori Pengeluaran</h3></div>
                         <div id="kategoriSummaryContainer" style="display: flex; flex-direction: column; gap: 10px;"></div>
                     </div>
                 </div>
@@ -410,7 +392,7 @@
                     <div class="panel">
                         <div class="panel-header"><h3>Backup & Restore Data JSON Permanen</h3></div>
                         <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">
-                            Seluruh data Anda tersimpan aman secara lokal di browser. Anda dapat mendownload file cadangan (JSON) atau merestore data kapan saja tanpa takut hilang.
+                            Seluruh data mutasi, saldo rekening, dan investasi emas tersimpan permanen di browser Anda. Anda dapat mengunduh atau memulihkan data kapan saja.
                         </p>
                         <div class="flex-row">
                             <button class="btn btn-blue" onclick="downloadJSON()">Download Backup JSON</button>
@@ -427,19 +409,18 @@
 
     <script>
         // --- DATABASE LOCALSTORAGE UTAMA ---
-        let db = JSON.parse(localStorage.getItem('masspeww_db_v3')) || {
+        let db = JSON.parse(localStorage.getItem('maspeww_db_v4')) || {
             rekening: [
-                { id: 1, nama: 'BCA', holder: 'Utama', nomor: '12345678', saldo: 15000000 }
+                { id: 1, nama: 'BCA', holder: 'Rekening Utama', nomor: '1234561828', saldo: 15000000 }
             ],
             transaksi: [],
             target: [
                 { nama: 'Dana Darurat', nominal: 10000000, terkumpul: 4000000, deadline: '2026-12-31' }
-            ],
-            emasGram: 0
+            ]
         };
 
         // --- AUTENTIKASI ---
-        if (sessionStorage.getItem('masspeww_logged') === 'true') {
+        if (sessionStorage.getItem('maspeww_logged') === 'true') {
             bukaAplikasi();
         }
 
@@ -447,7 +428,7 @@
             let u = document.getElementById('txtUser').value.trim();
             let p = document.getElementById('txtPass').value.trim();
             if (u === 'vandoza' && p === '1') {
-                sessionStorage.setItem('masspeww_logged', 'true');
+                sessionStorage.setItem('maspeww_logged', 'true');
                 bukaAplikasi();
             } else {
                 document.getElementById('loginErr').style.display = 'block';
@@ -455,7 +436,7 @@
         }
 
         function prosesLogout() {
-            sessionStorage.removeItem('masspeww_logged');
+            sessionStorage.removeItem('maspeww_logged');
             document.getElementById('appWrapper').style.display = 'none';
             document.getElementById('loginWrapper').style.display = 'flex';
         }
@@ -487,7 +468,7 @@
         }
 
         function saveDB() {
-            localStorage.setItem('masspeww_db_v3', JSON.stringify(db));
+            localStorage.setItem('maspeww_db_v4', JSON.stringify(db));
         }
 
         function formatRupiah(angka) {
@@ -495,13 +476,13 @@
         }
 
         function formatNoRek(no) {
-            if (!no) return '****0000';
+            if (!no) return '****1828';
             let str = no.toString();
             if (str.length <= 4) return '****' + str;
             return '****' + str.slice(-4);
         }
 
-        // --- MANAJEMEN REKENING ---
+        // --- REKENING ---
         function tambahRekening() {
             let nama = document.getElementById('bankName').value.trim();
             let holder = document.getElementById('bankHolder').value.trim();
@@ -531,19 +512,23 @@
             }
         }
 
-        // --- MANAJEMEN TRANSAKSI & MUTASI ---
+        // --- TRANSAKSI & BUY GOLD ---
         function updateKategoriOptions() {
             let jenis = document.getElementById('trJenis').value;
             let katSelect = document.getElementById('trKategori');
+            let groupGram = document.getElementById('groupGram');
             katSelect.innerHTML = '';
 
             let options = [];
             if (jenis === 'Masuk') {
                 options = ['Gaji', 'Bonus', 'Transfer', 'Pendapatan lainnya'];
+                groupGram.style.display = 'none';
             } else if (jenis === 'Keluar') {
                 options = ['Makan', 'Transportasi', 'Belanja', 'Tagihan', 'Hiburan', 'Keluarga', 'Tabungan', 'Lainnya'];
+                groupGram.style.display = 'none';
             } else if (jenis === 'BUY GOLD') {
                 options = ['BUY GOLD'];
+                groupGram.style.display = 'flex';
             }
 
             options.forEach(opt => {
@@ -560,6 +545,7 @@
             let kategori = document.getElementById('trKategori').value;
             let rekId = parseInt(document.getElementById('trRekening').value);
             let nominal = parseFloat(document.getElementById('trNominal').value) || 0;
+            let gram = parseFloat(document.getElementById('trGram').value) || 0;
             let ket = document.getElementById('trKet').value.trim();
             let fileInput = document.getElementById('trFile').files[0];
 
@@ -574,14 +560,17 @@
                 return;
             }
 
-            // Update Saldo Rekening
+            // Validasi saldo cukup jika pengeluaran / buy gold
+            if ((jenis === 'Keluar' || jenis === 'BUY GOLD') && targetRek.saldo < nominal) {
+                alert('Saldo pada rekening terpilih tidak mencukupi!');
+                return;
+            }
+
+            // Kurangi/tambah saldo rekening langsung
             if (jenis === 'Masuk') {
                 targetRek.saldo += nominal;
-            } else if (jenis === 'Keluar') {
+            } else if (jenis === 'Keluar' || jenis === 'BUY GOLD') {
                 targetRek.saldo -= nominal;
-            } else if (jenis === 'BUY GOLD') {
-                targetRek.saldo -= nominal;
-                db.emasGram += (nominal / 1000000); // Asumsi sederhana atau konversi gram fleksibel
             }
 
             function finalizeTransaction(proofBase64) {
@@ -592,18 +581,20 @@
                     rekeningNama: targetRek.nama + ' (' + targetRek.holder + ')',
                     jenis: jenis,
                     kategori: kategori,
-                    keterangan: ket,
+                    keterangan: jenis === 'BUY GOLD' ? `Beli Emas ${gram} Gram - ${ket}` : ket,
                     nominal: nominal,
+                    gram: jenis === 'BUY GOLD' ? gram : 0,
                     bukti: proofBase64 || ''
                 });
 
                 saveDB();
                 renderAll();
                 document.getElementById('trNominal').value = '';
+                document.getElementById('trGram').value = '';
                 document.getElementById('trKet').value = '';
                 document.getElementById('trFile').value = '';
                 document.getElementById('trTgl').valueAsDate = new Date();
-                alert('Mutasi transaksi berhasil dicatat secara permanen!');
+                alert('Transaksi berhasil dicatat dan saldo diperbarui secara permanen!');
             }
 
             if (fileInput) {
@@ -617,16 +608,13 @@
         }
 
         function hapusTransaksi(id) {
-            if (confirm('Yakin ingin menghapus transaksi ini? Saldo rekening akan disesuaikan kembali.')) {
+            if (confirm('Yakin ingin menghapus transaksi ini? Saldo rekening akan dikembalikan seperti semula.')) {
                 let trx = db.transaksi.find(t => t.id === id);
                 if (trx) {
                     let rek = db.rekening.find(r => r.id === trx.rekeningId);
                     if (rek) {
                         if (trx.jenis === 'Masuk') rek.saldo -= trx.nominal;
-                        else if (trx.jenis === 'Keluar' || trx.jenis === 'BUY GOLD') {
-                            rek.saldo += trx.nominal;
-                            if (trx.jenis === 'BUY GOLD') db.emasGram -= (trx.nominal / 1000000);
-                        }
+                        else if (trx.jenis === 'Keluar' || trx.jenis === 'BUY GOLD') rek.saldo += trx.nominal;
                     }
                     db.transaksi = db.transaksi.filter(t => t.id !== id);
                     saveDB();
@@ -640,9 +628,9 @@
             document.getElementById('proofModal').style.display = 'flex';
         }
 
-        // --- RENDER SELURUH DATA & STATISTIK ---
+        // --- RENDER SEMUA KOMPONEN ---
         function renderAll() {
-            // Update dropdown rekening di form transaksi
+            // Render dropdown rekening
             let rekSelect = document.getElementById('trRekening');
             rekSelect.innerHTML = '';
             db.rekening.forEach(r => {
@@ -670,30 +658,33 @@
             document.getElementById('rekeningTableBody').innerHTML = rekHTML || '<tr><td colspan="5" style="text-align:center;">Belum ada rekening.</td></tr>';
             document.getElementById('dashTotalSaldo').innerText = formatRupiah(totalSaldoGlobal);
 
-            // Hitung Bulan Ini
+            // Hitung Bulan Ini & Akumulasi Emas
             let now = new Date();
             let curMonth = String(now.getMonth() + 1).padStart(2, '0');
             let curYear = String(now.getFullYear());
 
             let tMasukBulanIni = 0;
             let tKeluarBulanIni = 0;
-            let tTabunganBulanIni = 0;
+            let tBuyGoldBulanIni = 0;
+            let totalGramEmas = 0;
 
             db.transaksi.forEach(t => {
+                if (t.jenis === 'BUY GOLD') {
+                    totalGramEmas += (t.gram || 0);
+                }
                 let [y, m] = t.tanggal.split('-');
                 if (m === curMonth && y === curYear) {
                     if (t.jenis === 'Masuk') tMasukBulanIni += t.nominal;
                     else if (t.jenis === 'Keluar') tKeluarBulanIni += t.nominal;
-                    else if (t.jenis === 'BUY GOLD') tTabunganBulanIni += t.nominal;
+                    else if (t.jenis === 'BUY GOLD') tBuyGoldBulanIni += t.nominal;
                 }
             });
 
             document.getElementById('dashMasuk').innerText = formatRupiah(tMasukBulanIni);
             document.getElementById('dashKeluar').innerText = formatRupiah(tKeluarBulanIni);
-            document.getElementById('dashTabungan').innerText = `${db.emasGram.toFixed(2)} Gram (${formatRupiah(tTabunganBulanIni)})`;
-            document.getElementById('dashSisa').innerText = formatRupiah(tMasukBulanIni - (tKeluarBulanIni + tTabunganBulanIni));
+            document.getElementById('dashTabungan').innerText = `${totalGramEmas.toFixed(2)} Gram (${formatRupiah(tBuyGoldBulanIni)})`;
+            document.getElementById('dashSisa').innerText = formatRupiah(tMasukBulanIni - (tKeluarBulanIni + tBuyGoldBulanIni));
 
-            // Render Mutasi Tabel (Saldo Berjalan)
             renderTabelMutasi('dashTableBody', true);
             renderTransaksi();
             renderLaporan();
@@ -704,10 +695,8 @@
             let tbody = document.getElementById(elementId);
             let keyword = document.getElementById('searchKeyword') ? document.getElementById('searchKeyword').value.toLowerCase() : '';
             
-            // Urutkan berdasarkan tanggal kronologis untuk kalkulasi saldo berjalan yang benar
             let sortedTrx = [...db.transaksi].sort((a,b) => new Date(a.tanggal) - new Date(b.tanggal));
             
-            let html = '';
             let runningSaldo = 0;
             let renderedList = [];
 
@@ -715,14 +704,13 @@
                 if (t.jenis === 'Masuk') runningSaldo += t.nominal;
                 else runningSaldo -= t.nominal;
 
-                // Filter keyword pencarian
                 if (keyword && !t.keterangan.toLowerCase().includes(keyword) && !t.kategori.toLowerCase().includes(keyword)) {
                     return;
                 }
 
                 let masukStr = t.jenis === 'Masuk' ? formatRupiah(t.nominal) : '-';
                 let keluarStr = (t.jenis === 'Keluar' || t.jenis === 'BUY GOLD') ? formatRupiah(t.nominal) : '-';
-                let buktiBtn = t.bukti ? `<button class="btn btn-blue btn-sm" onclick="bukaBukti('${t.bukti}')">Lihat Proff</button>` : '-';
+                let buktiBtn = t.bukti ? `<button class="btn btn-blue btn-sm" onclick="bukaBukti('${t.bukti}')">Lihat Proof</button>` : '-';
 
                 renderedList.unshift({
                     html: `<tr>
@@ -734,15 +722,11 @@
                         <td class="text-right txt-saldo">${formatRupiah(runningSaldo)}</td>
                         <td>${buktiBtn}</td>
                         ${elementId === 'transaksiTableBody' ? `<td class="text-right"><button class="btn btn-red btn-sm" onclick="hapusTransaksi(${t.id})">Hapus</button></td>` : ''}
-                    </tr>`,
-                    timestamp: new Date(t.tanggal).getTime()
+                    </tr>`
                 });
             });
 
-            if (limit5) {
-                renderedList = renderedList.slice(0, 5);
-            }
-
+            if (limit5) renderedList = renderedList.slice(0, 5);
             tbody.innerHTML = renderedList.map(r => r.html).join('') || `<tr><td colspan="9" style="text-align:center;">Belum ada data transaksi mutasi.</td></tr>`;
         }
 
@@ -755,7 +739,7 @@
             let b = document.getElementById('lapBulan').value;
             let y = document.getElementById('lapTahun').value;
 
-            let totalM = 0, totalK = 0, totalT = 0;
+            let totalM = 0, totalK = 0, totalG = 0;
             let kategoriMap = {};
 
             db.transaksi.forEach(tr => {
@@ -766,20 +750,22 @@
                         totalK += tr.nominal;
                         kategoriMap[tr.kategori] = (kategoriMap[tr.kategori] || 0) + tr.nominal;
                     } else if (tr.jenis === 'BUY GOLD') {
-                        totalT += tr.nominal;
+                        totalG += tr.nominal;
+                        kategoriMap['BUY GOLD'] = (kategoriMap['BUY GOLD'] || 0) + tr.nominal;
                     }
                 }
             });
 
             document.getElementById('lapTotalMasuk').innerText = formatRupiah(totalM);
             document.getElementById('lapTotalKeluar').innerText = formatRupiah(totalK);
-            document.getElementById('lapTotalTabungan').innerText = formatRupiah(totalT);
-            document.getElementById('lapSisaUang').innerText = formatRupiah(totalM - (totalK + totalT));
+            document.getElementById('lapTotalTabungan').innerText = formatRupiah(totalG);
+            document.getElementById('lapSisaUang').innerText = formatRupiah(totalM - (totalK + totalG));
 
             let katContainer = document.getElementById('kategoriSummaryContainer');
             let katHTML = '';
+            let totalPengeluaranGabungan = totalK + totalG;
             for (let kat in kategoriMap) {
-                let p = totalK > 0 ? ((kategoriMap[kat] / totalK) * 100).toFixed(1) : 0;
+                let p = totalPengeluaranGabungan > 0 ? ((kategoriMap[kat] / totalPengeluaranGabungan) * 100).toFixed(1) : 0;
                 katHTML += `<div>
                     <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;">
                         <span>${kat}</span><span>${formatRupiah(kategoriMap[kat])} (${p}%)</span>
@@ -818,7 +804,7 @@
             let container = document.getElementById('targetContainer');
             let html = '';
             db.target.forEach((tg, idx) => {
-                let percent = tg.nominal > 0 ? Math.min(100, ((tg. terkumpul / tg.nominal) * 100)).toFixed(1) : 0;
+                let percent = tg.nominal > 0 ? Math.min(100, ((tg.terkumpul / tg.nominal) * 100)).toFixed(1) : 0;
                 html += `<div style="background: var(--bg-input); padding: 16px; border-radius: 8px; border: 1px solid var(--border-color);">
                     <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
                         <strong>${tg.nama} (Deadline: ${tg.deadline || '-'})</strong>
@@ -839,7 +825,7 @@
             container.innerHTML = html || '<p style="font-size:13px; color:var(--text-muted);">Belum ada target tabungan.</p>';
         }
 
-        // --- BACKUP & RESTORE JSON ---
+        // --- BACKUP & EXPORT JSON/CSV ---
         function downloadJSON() {
             let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(db, null, 2));
             let dlAnchor = document.createElement('a');
@@ -870,9 +856,9 @@
                 alert('Tidak ada data transaksi untuk diexport!');
                 return;
             }
-            let csv = "Tanggal,Rekening,Jenis,Kategori,Keterangan,Nominal\n";
+            let csv = "Tanggal,Rekening,Jenis,Kategori,Keterangan,Nominal,Gram Emas\n";
             db.transaksi.forEach(t => {
-                csv += `${t.tanggal},"${t.rekeningNama}",${t.jenis},${t.kategori},"${t.keterangan}",${t.nominal}\n`;
+                csv += `${t.tanggal},"${t.rekeningNama}",${t.jenis},${t.kategori},"${t.keterangan}",${t.nominal},${t.gram || 0}\n`;
             });
             let blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
             let url = URL.createObjectURL(blob);
