@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mutasi Rekening - Masspeww Finance</title>
+    <title>Mutasi Rekening Permanen - Masspeww Finance</title>
     <style>
         :root {
             --bg-main: #0b0f19;
@@ -48,7 +48,7 @@
         .error-msg { color: var(--accent-red); font-size: 12px; text-align: center; margin-top: 10px; display: none; }
 
         /* Main Dashboard Layout */
-        #appWrapper { display: none; width: 100vw; height: 100vh; display: none; }
+        #appWrapper { display: none; width: 100vw; height: 100vh; }
         .sidebar {
             width: 260px; background: var(--bg-card); border-right: 1px solid var(--border-color);
             display: flex; flex-direction: column; justify-content: space-between; padding: 24px;
@@ -99,7 +99,7 @@
         .btn-success { background: var(--accent-green); color: white; border: none; padding: 10px 16px; border-radius: 6px; cursor: pointer; font-weight: 700; font-size: 13px; margin-left: 8px; }
         .btn-success:hover { background: #059669; }
 
-        /* Table Styling (Mutasi Style) */
+        /* Tabel Mutasi Bank Style */
         table { width: 100%; border-collapse: collapse; margin-top: 10px; }
         th, td { border: 1px solid var(--border-color); padding: 12px; text-align: left; font-size: 13px; font-weight: 600; }
         th { background: var(--bg-input); color: #e5e7eb; }
@@ -163,7 +163,7 @@
         <!-- Main Workspace -->
         <div class="main-content">
             <div class="header-top">
-                <span>Mutasi Rekening Keuangan</span>
+                <span>Mutasi Rekening Permanen</span>
                 <button class="btn-logout" onclick="prosesLogout()">Keluar Akun</button>
             </div>
 
@@ -213,7 +213,7 @@
 
                 <!-- Tabel Mutasi Rekening -->
                 <div class="panel-section">
-                    <h3>Tabel Mutasi Rekening</h3>
+                    <h3>Tabel Mutasi Rekening Bank</h3>
                     <table>
                         <thead>
                             <tr>
@@ -228,7 +228,7 @@
                             </tr>
                         </thead>
                         <tbody id="tabelRiwayat">
-                            <!-- Data mutasi bank otomatis dimuat di sini -->
+                            <!-- Data mutasi bank otomatis dimuat di sini secara permanen -->
                         </tbody>
                     </table>
                 </div>
@@ -237,7 +237,7 @@
     </div>
 
     <script>
-        // Cek Sesi Login
+        // Cek Sesi Login Permanen
         if (sessionStorage.getItem('masspeww_logged') === 'true') {
             bukaAplikasi();
         }
@@ -275,8 +275,8 @@
             renderDashboard();
         }
 
-        // Database LocalStorage Utama
-        let dbData = JSON.parse(localStorage.getItem('masspeww_database_mutasi')) || {
+        // Database LocalStorage Permanen lintas sesi & pergantian tanggal
+        let dbData = JSON.parse(localStorage.getItem('masspeww_database_mutasi_v2')) || {
             transaksi: [],
             emas5g: 0,
             emas1g: 0
@@ -305,14 +305,17 @@
                     bukti: imageBase64 || ''
                 });
 
-                // Reset form
+                // Simpan permanen langsung ke LocalStorage browser
+                localStorage.setItem('masspeww_database_mutasi_v2', JSON.stringify(dbData));
+
+                // Reset form input
                 document.getElementById('inputNominal').value = '';
                 document.getElementById('inputFile').value = '';
                 document.getElementById('inputKet').value = '';
                 document.getElementById('inputTanggal').valueAsDate = new Date();
 
                 renderDashboard();
-                alert('Mutasi transaksi berhasil dicatat permanen!');
+                alert('Mutasi transaksi berhasil dicatat dan disimpan secara permanen!');
             }
 
             if (fileInput) {
@@ -332,13 +335,15 @@
         function simpanDataEmas() {
             dbData.emas5g = parseFloat(document.getElementById('inputGold5g').value) || 0;
             dbData.emas1g = parseFloat(document.getElementById('inputGold1g').value) || 0;
+            localStorage.setItem('masspeww_database_mutasi_v2', JSON.stringify(dbData));
             renderDashboard();
-            alert('Portofolio emas berhasil diperbarui!');
+            alert('Portofolio emas berhasil diperbarui secara permanen!');
         }
 
         function hapusTransaksi(index) {
-            if (confirm('Yakin ingin menghapus data mutasi ini?')) {
+            if (confirm('Yakin ingin menghapus data mutasi ini secara permanen?')) {
                 dbData.transaksi.splice(index, 1);
+                localStorage.setItem('masspeww_database_mutasi_v2', JSON.stringify(dbData));
                 renderDashboard();
             }
         }
@@ -366,8 +371,11 @@
         }
 
         function renderDashboard() {
-            // Simpan ke LocalStorage agar aman dari refresh / ganti tanggal
-            localStorage.setItem('masspeww_database_mutasi', JSON.stringify(dbData));
+            // Ambil data terbaru dari storage untuk memastikan konsistensi
+            let savedDb = JSON.parse(localStorage.getItem('masspeww_database_mutasi_v2'));
+            if (savedDb) {
+                dbData = savedDb;
+            }
 
             let htmlTable = '';
             let totalMasuk = 0;
