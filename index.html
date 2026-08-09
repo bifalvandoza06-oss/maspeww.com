@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DASHBOARDMASPEWW - Mobile Version</title>
+    <title>Dashboard Keuangan Maspeww</title>
     <style>
         :root {
             --bg-main: #0f172a;
@@ -11,82 +11,48 @@
             --bg-input: #334155;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --accent-blue: #38bdf8;
-            --accent-green: #4ade80;
-            --accent-red: #f87171;
-            --accent-gold: #fbbf24;
-            --border-color: #475569;
+            --accent-blue: #3b82f6;
+            --accent-green: #22c55e;
+            --accent-red: #ef4444;
+            --accent-gold: #eab308;
+            --border: #475569;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            -webkit-tap-highlight-color: transparent;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
             background-color: var(--bg-main);
             color: var(--text-main);
-            padding: 10px;
-            padding-bottom: 70px; /* Ruang untuk navigasi bawah mobile */
+            padding-bottom: 70px; /* Ruang untuk navigasi bawah HP */
         }
 
         header {
+            background-color: var(--bg-card);
+            padding: 15px 20px;
             text-align: center;
-            padding: 15px 10px;
-            margin-bottom: 15px;
-            background: var(--bg-card);
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         header h1 {
             font-size: 18px;
             color: var(--accent-blue);
-            letter-spacing: 0.5px;
         }
 
-        header p {
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-top: 2px;
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 15px;
         }
 
-        /* Navigasi Tab Bawah ala Mobile App */
-        .nav-tabs {
-            display: flex;
-            justify-content: space-around;
-            background: var(--bg-card);
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 8px 5px;
-            border-top: 1px solid var(--border-color);
-            z-index: 1000;
-        }
-
-        .nav-tab {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 11px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2px;
-            cursor: pointer;
-            flex: 1;
-            padding: 4px;
-        }
-
-        .nav-tab.active {
-            color: var(--accent-blue);
-            font-weight: bold;
-        }
-
+        /* Tab Content */
         .tab-content {
             display: none;
         }
@@ -95,53 +61,47 @@
             display: block;
         }
 
-        /* Card / Container */
+        /* Card Component */
         .card {
-            background: var(--bg-card);
+            background-color: var(--bg-card);
             border-radius: 12px;
             padding: 15px;
             margin-bottom: 15px;
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--border);
         }
 
         .card-title {
-            font-size: 14px;
-            font-weight: bold;
+            font-size: 15px;
+            font-weight: 600;
             margin-bottom: 12px;
-            color: var(--accent-blue);
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         /* Grid Statistik */
-        .stats-grid {
+        .grid-stats {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(2, 1fr);
             gap: 10px;
             margin-bottom: 15px;
         }
 
-        .stat-card {
-            background: var(--bg-input);
+        .stat-box {
+            background: var(--bg-card);
             padding: 12px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            border: 1px solid var(--border);
         }
 
-        .stat-card.full {
-            grid-column: span 2;
-        }
-
-        .stat-label {
-            font-size: 11px;
+        .stat-box span {
+            font-size: 12px;
             color: var(--text-muted);
         }
 
-        .stat-value {
-            font-size: 15px;
-            font-weight: bold;
-            margin-top: 4px;
+        .stat-box h3 {
+            font-size: 16px;
+            margin-top: 5px;
         }
 
         /* Form Elements */
@@ -158,679 +118,537 @@
 
         input, select, textarea {
             width: 100%;
-            background: var(--bg-input);
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
             padding: 10px;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            color: var(--text-main);
             border-radius: 8px;
             font-size: 14px;
         }
 
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--accent-blue);
-        }
-
-        /* Tombol */
-        .btn {
+        button {
             width: 100%;
             padding: 12px;
+            background: var(--accent-blue);
+            color: white;
             border: none;
             border-radius: 8px;
-            font-size: 14px;
-            font-weight: bold;
+            font-weight: 600;
             cursor: pointer;
-            text-align: center;
+            font-size: 14px;
         }
 
-        .btn-blue { background: var(--accent-blue); color: #0f172a; }
-        .btn-green { background: var(--accent-green); color: #0f172a; }
-        .btn-red { background: var(--accent-red); color: #0f172a; }
-        .btn-outline { background: transparent; border: 1px solid var(--border-color); color: var(--text-main); }
-        .btn-sm { padding: 6px 10px; font-size: 12px; width: auto; }
+        button:active {
+            opacity: 0.8;
+        }
 
-        .btn-group {
+        /* List / Table Styling */
+        .list-item {
             display: flex;
-            gap: 8px;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 13px;
         }
 
-        /* Tabel Responsif */
-        .table-responsive {
-            width: 100%;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            margin-top: 10px;
+        .list-item:last-child {
+            border-bottom: none;
         }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 12px;
-            white-space: nowrap;
-        }
-
-        th, td {
-            padding: 8px 10px;
-            text-align: left;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        th {
-            background: var(--bg-input);
-            color: var(--text-muted);
-        }
-
-        /* Badge Status */
-        .badge {
-            padding: 3px 6px;
-            border-radius: 4px;
-            font-size: 10px;
-            font-weight: bold;
-        }
-        .badge-masuk { background: rgba(74, 222, 128, 0.2); color: var(--accent-green); }
-        .badge-keluar { background: rgba(248, 113, 113, 0.2); color: var(--accent-red); }
-        .badge-gold { background: rgba(251, 191, 36, 0.2); color: var(--accent-gold); }
 
         .txt-masuk { color: var(--accent-green); }
         .txt-keluar { color: var(--accent-red); }
-        .text-right { text-align: right; }
+        .txt-emas { color: var(--accent-gold); }
 
-        /* Modal Preview Bukti */
-        .modal {
-            display: none;
+        /* Bottom Navigation untuk HP */
+        .bottom-nav {
             position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.8);
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            padding: 20px;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 1000;
         }
-        .modal img {
-            max-width: 100%;
-            max-height: 80vh;
-            border-radius: 8px;
+
+        .nav-item {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 11px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            width: auto;
+            padding: 0;
+        }
+
+        .nav-item.active {
+            color: var(--accent-blue);
+        }
+
+        .nav-item span.icon {
+            font-size: 18px;
+            margin-bottom: 2px;
+        }
+
+        /* Responsive untuk Layar Besar */
+        @media (min-width: 768px) {
+            .bottom-nav {
+                display: none; /* Sembunyikan navbar bawah di PC, bisa pakai header nav jika mau */
+            }
+            body {
+                padding-bottom: 20px;
+            }
+            .desktop-nav {
+                display: flex;
+                gap: 10px;
+                justify-content: center;
+                margin-bottom: 15px;
+            }
+            .desktop-nav button {
+                width: auto;
+                padding: 8px 16px;
+                background: var(--bg-card);
+                border: 1px solid var(--border);
+            }
+            .desktop-nav button.active {
+                background: var(--accent-blue);
+                border-color: var(--accent-blue);
+            }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>DASHBOARD MASPEWW</h1>
-        <p>Aplikasi Keuangan Pribadi Mobile</p>
+        <h1>💎 Dashboard Keuangan Maspeww</h1>
     </header>
 
-    <!-- KONTEN TAB 1: DASHBOARD -->
-    <div id="tab-dashboard" class="tab-content active">
-        <div class="stats-grid">
-            <div class="stat-card full" style="background: linear-gradient(135deg, #1e293b, #0f172a); border-color: var(--accent-blue);">
-                <div class="stat-label">TOTAL SALDO REKENING</div>
-                <div class="stat-value" id="dashTotalSaldo" style="font-size: 20px; color: var(--accent-blue);">Rp 0</div>
+    <div class="container">
+        <!-- Navigasi khusus tampilan Desktop/PC -->
+        <div class="desktop-nav" style="display: none;" id="desktopNav">
+            <button onclick="switchTab('dashboard')" class="d-btn active" id="btn-dash">Dashboard</button>
+            <button onclick="switchTab('transaksi')" class="d-btn" id="btn-trx">Transaksi</button>
+            <button onclick="switchTab('rekening')" class="d-btn" id="btn-rek">Rekening</button>
+            <button onclick="switchTab('laporan')" class="d-btn" id="btn-lap">Laporan</button>
+        </div>
+
+        <!-- TAB 1: DASHBOARD -->
+        <div id="tab-dashboard" class="tab-content active">
+            <div class="grid-stats">
+                <div class="stat-box">
+                    <span>Total Saldo</span>
+                    <h3 id="dashTotalSaldo">Rp 0</h3>
+                </div>
+                <div class="stat-box">
+                    <span>Akumulasi Emas</span>
+                    <h3 id="dashTotalEmas" class="txt-emas">0.00 gr</h3>
+                </div>
+                <div class="stat-box">
+                    <span>Masuk Bulan Ini</span>
+                    <h3 id="dashMasuk" class="txt-masuk">Rp 0</h3>
+                </div>
+                <div class="stat-box">
+                    <span>Keluar Bulan Ini</span>
+                    <h3 id="dashKeluar" class="txt-keluar">Rp 0</h3>
+                </div>
             </div>
-            <div class="stat-card">
-                <div class="stat-label">PEMASUKAN (Bulan Ini)</div>
-                <div class="stat-value txt-masuk" id="dashMasuk" style="font-size: 13px;">Rp 0</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">PENGELUARAN (Bulan Ini)</div>
-                <div class="stat-value txt-keluar" id="dashKeluar" style="font-size: 13px;">Rp 0</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">AKUMULASI EMAS</div>
-                <div class="stat-value" id="dashTabungan" style="font-size: 12px; color: var(--accent-gold);">0 Gram</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">SISA BERSIH</div>
-                <div class="stat-value" id="dashSisa" style="font-size: 13px;">Rp 0</div>
+
+            <div class="card">
+                <div class="card-title">Ringkasan Kategori Bulan Ini</div>
+                <div id="kategoriSummaryContainer">
+                    <p style="font-size: 12px; color: var(--text-muted);">Memuat data...</p>
+                </div>
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-title">Mutasi Transaksi Terbaru</div>
-            <div class="table-responsive">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Tgl</th>
-                            <th>Rekening</th>
-                            <th>Kategori & Keterangan</th>
-                            <th class="text-right">Masuk</th>
-                            <th class="text-right">Keluar</th>
-                            <th>Bukti</th>
-                        </tr>
-                    </thead>
-                    <tbody id="dashTableBody">
-                        <tr><td colspan="6" style="text-align: center; color: var(--text-muted);">Belum ada transaksi</td></tr>
-                    </tbody>
-                </table>
+        <!-- TAB 2: TRANSAKSI -->
+        <div id="tab-transaksi" class="tab-content">
+            <div class="card">
+                <div class="card-title">Tambah Transaksi Baru</div>
+                <form id="formTransaksi" onsubmit="handleTambahTransaksi(event)">
+                    <div class="form-group">
+                        <label>Jenis Transaksi</label>
+                        <select id="trxJenis" onchange="updateKategoriOptions()">
+                            <option value="Masuk">Pemasukan</option>
+                            <option value="Keluar">Pengeluaran</option>
+                            <option value="Emas">Beli Emas</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Rekening / Dompet</label>
+                        <select id="trxRekening" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Kategori</label>
+                        <select id="trxKategori" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Nominal (Rp)</label>
+                        <input type="number" id="trxNominal" placeholder="Contoh: 50000" required>
+                    </div>
+                    <div class="form-group" id="groupGram" style="display: none;">
+                        <label>Berat Emas (Gram)</label>
+                        <input type="number" step="0.01" id="trxGram" placeholder="Contoh: 1.5">
+                    </div>
+                    <div class="form-group">
+                        <label>Tanggal</label>
+                        <input type="date" id="trxTanggal" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Keterangan (Opsional)</label>
+                        <textarea id="trxKet" rows="2" placeholder="Catatan tambahan..."></textarea>
+                    </div>
+                    <button type="submit">Simpan Transaksi</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Riwayat Transaksi</div>
+                <div id="riwayatTransaksiList">
+                    <!-- Daftar transaksi akan muncul di sini -->
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: REKENING & DOMPET -->
+        <div id="tab-rekening" class="tab-content">
+            <div class="card">
+                <div class="card-title">Tambah Rekening / Dompet</div>
+                <form id="formRekening" onsubmit="handleTambahRekening(event)">
+                    <div class="form-group">
+                        <label>Nama Rekening / Dompet</label>
+                        <input type="text" id="rekNama" placeholder="Contoh: BCA, Dompet Tunai, E-Wallet" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Saldo Awal (Rp)</label>
+                        <input type="number" id="rekSaldo" placeholder="0" required>
+                    </div>
+                    <button type="submit">Tambah Rekening</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Daftar Rekening Aktif</div>
+                <div id="rekeningListContainer"></div>
+            </div>
+        </div>
+
+        <!-- TAB 4: LAPORAN & PENGATURAN -->
+        <div id="tab-laporan" class="tab-content">
+            <div class="card">
+                <div class="card-title">Pusat Data & Cadangan</div>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <button onclick="downloadJSON()" style="background: var(--bg-input); border: 1px solid var(--border);">Unduh Cadangan (JSON)</button>
+                    <button onclick="exportCSV()" style="background: var(--bg-input); border: 1px solid var(--border);">Ekspor Laporan (CSV)</button>
+                    <div style="margin-top: 5px;">
+                        <label style="margin-bottom: 5px;">Pulihkan Data (Upload JSON):</label>
+                        <input type="file" id="importFile" accept=".json" onchange="restoreJSON(event)" style="padding: 5px;">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- KONTEN TAB 2: TRANSAKSI -->
-    <div id="tab-transaksi" class="tab-content">
-        <div class="card">
-            <div class="card-title">Catat Transaksi Baru</div>
-            <div class="form-group">
-                <label>Tanggal</label>
-                <input type="date" id="trTgl">
-            </div>
-            <div class="form-group">
-                <label>Jenis Transaksi</label>
-                <select id="trJenis" onchange="updateKategoriOptions()">
-                    <option value="Keluar">Pengeluaran (-)</option>
-                    <option value="Masuk">Pemasukan (+)</option>
-                    <option value="BUY GOLD">Beli Emas / Logam Mulia</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Kategori</label>
-                <select id="trKategori"></select>
-            </div>
-            <div class="form-group" id="groupGram" style="display: none;">
-                <label>Jumlah Gram Emas</label>
-                <input type="number" id="trGram" step="0.01" placeholder="Contoh: 1.5">
-            </div>
-            <div class="form-group">
-                <label>Rekening / Dompet Sumber</label>
-                <select id="trRekening"></select>
-            </div>
-            <div class="form-group">
-                <label>Nominal (Rp)</label>
-                <input type="number" id="trNominal" placeholder="Contoh: 50000">
-            </div>
-            <div class="form-group">
-                <label>Keterangan / Catatan</label>
-                <input type="text" id="trKet" placeholder="Opsional...">
-            </div>
-            <div class="form-group">
-                <label>Foto Bukti / Nota (Opsional)</label>
-                <input type="file" id="trFile" accept="image/*">
-            </div>
-            <button class="btn btn-blue" onclick="catatTransaksi()">Simpan Transaksi</button>
-        </div>
-
-        <div class="card">
-            <div class="card-title">Riwayat & Filter Mutasi</div>
-            <div class="form-group">
-                <input type="text" id="searchKeyword" placeholder="Cari keterangan, kategori, dll..." onkeyup="renderTransaksi()">
-            </div>
-            <div class="table-responsive">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Tgl</th>
-                            <th>Rekening</th>
-                            <th>Jenis</th>
-                            <th>Kategori</th>
-                            <th class="text-right">Masuk</th>
-                            <th class="text-right">Keluar</th>
-                            <th>Bukti</th>
-                            <th class="text-right">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody id="transaksiTableBody"></tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <!-- KONTEN TAB 3: REKENING -->
-    <div id="tab-rekening" class="tab-content">
-        <div class="card">
-            <div class="card-title">Tambah Rekening / Dompet Baru</div>
-            <div class="form-group">
-                <label>Nama Bank / E-Wallet</label>
-                <input type="text" id="bankName" placeholder="Contoh: BCA / GoPay">
-            </div>
-            <div class="form-group">
-                <label>Nama Pemilik</label>
-                <input type="text" id="bankHolder" placeholder="Atas Nama">
-            </div>
-            <div class="form-group">
-                <label>Nomor Rekening</label>
-                <input type="text" id="bankNumber" placeholder="Nomor Rekening">
-            </div>
-            <div class="form-group">
-                <label>Saldo Awal (Rp)</label>
-                <input type="number" id="bankBalance" placeholder="0">
-            </div>
-            <button class="btn btn-green" onclick="tambahRekening()">Tambah Rekening</button>
-        </div>
-
-        <div class="card">
-            <div class="card-title">Daftar Rekening Aktif</div>
-            <div class="table-responsive">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Bank</th>
-                            <th>Nomor</th>
-                            <th class="text-right">Saldo</th>
-                            <th class="text-right">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody id="rekeningTableBody"></tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <!-- KONTEN TAB 4: LAPORAN -->
-    <div id="tab-laporan" class="tab-content">
-        <div class="card">
-            <div class="card-title">Laporan Keuangan Bulanan</div>
-            <div class="stats-grid">
-                <div class="form-group">
-                    <label>Bulan</label>
-                    <select id="lapBulan" onchange="renderLaporan()">
-                        <option value="01">Januari</option><option value="02">Februari</option>
-                        <option value="03">Maret</option><option value="04">April</option>
-                        <option value="05">Mei</option><option value="06">Juni</option>
-                        <option value="07">Juli</option><option value="08" selected>Agustus</option>
-                        <option value="09">September</option><option value="10">Oktober</option>
-                        <option value="11">November</option><option value="12">Desember</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Tahun</label>
-                    <select id="lapTahun" onchange="renderLaporan()">
-                        <option value="2025">2025</option>
-                        <option value="2026" selected>2026</option>
-                        <option value="2027">2027</option>
-                    </select>
-                </div>
-            </div>
-
-            <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
-                <div style="display: flex; justify-content: space-between; font-size: 13px;">
-                    <span>Total Pemasukan:</span>
-                    <b class="txt-masuk" id="lapTotalMasuk">Rp 0</b>
-                </div>
-                <div style="display: flex; justify-content: space-between; font-size: 13px;">
-                    <span>Total Pengeluaran:</span>
-                    <b class="txt-keluar" id="lapTotalKeluar">Rp 0</b>
-                </div>
-                <div style="display: flex; justify-content: space-between; font-size: 13px;">
-                    <span>Pembelian Emas:</span>
-                    <b style="color: var(--accent-gold);" id="lapTotalTabungan">Rp 0</b>
-                </div>
-                <hr style="border-color: var(--border-color); margin: 5px 0;">
-                <div style="display: flex; justify-content: space-between; font-size: 14px;">
-                    <span>Sisa Kas Bulan Ini:</span>
-                    <b id="lapSisaUang">Rp 0</b>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-title">Ringkasan Pengeluaran per Kategori</div>
-            <div id="kategoriSummaryContainer" style="display: flex; flex-direction: column; gap: 10px;">
-                <p style="font-size: 12px; color: var(--text-muted);">Tidak ada data pengeluaran.</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-title">Backup & Restore Data</div>
-            <div class="btn-group" style="flex-direction: column;">
-                <button class="btn btn-outline" onclick="downloadJSON()">Unduh Backup (JSON)</button>
-                <label class="btn btn-outline" style="text-align: center; cursor: pointer; display: block;">
-                    Pulihkan Data (JSON) <input type="file" id="restoreFile" accept=".json" style="display: none;" onchange="restoreJSON(event)">
-                </label>
-                <button class="btn btn-outline" onclick="exportCSV()">Ekspor CSV (Excel)</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- NAVIGASI BAWAH (MOBILE APP STYLE) -->
-    <nav class="nav-tabs">
-        <button class="nav-tab active" onclick="switchTab('dashboard', this)">
-            <span>🏠</span>
-            <span>Home</span>
+    <!-- BOTTOM NAVIGATION (Khusus HP) -->
+    <nav class="bottom-nav">
+        <button class="nav-item active" onclick="switchTab('dashboard')" id="nav-dash">
+            <span class="icon">📊</span>
+            <span>Dashboard</span>
         </button>
-        <button class="nav-tab" onclick="switchTab('transaksi', this)">
-            <span>📝</span>
-            <span>Mutasi</span>
+        <button class="nav-item" onclick="switchTab('transaksi')" id="nav-trx">
+            <span class="icon">📝</span>
+            <span>Transaksi</span>
         </button>
-        <button class="nav-tab" onclick="switchTab('rekening', this)">
-            <span>💳</span>
-            <span>Dompet</span>
+        <button class="nav-item" onclick="switchTab('rekening')" id="nav-rek">
+            <span class="icon">💳</span>
+            <span>Rekening</span>
         </button>
-        <button class="nav-tab" onclick="switchTab('laporan', this)">
-            <span>📊</span>
-            <span>Laporan</span>
+        <button class="nav-item" onclick="switchTab('laporan')" id="nav-lap">
+            <span class="icon">⚙️</span>
+            <span>Lainnya</span>
         </button>
     </nav>
 
-    <!-- MODAL BUKTI TRANSAKSI -->
-    <div id="proofModal" class="modal" onclick="this.style.display='none'">
-        <img id="imgProofTarget" src="" alt="Bukti Transaksi">
-    </div>
-
     <script>
-        // --- INISIALISASI & LOCALSTORAGE ---
-        let db = JSON.parse(localStorage.getItem('maspeww_mobile_db')) || {
-            rekening: [],
-            transaksi: [],
-            target: []
+        // --- DATABASE LOCALSTORAGE ---
+        let db = JSON.parse(localStorage.getItem('maspeww_db')) || {
+            rekening: [
+                { id: 1, nama: 'Dompet Tunai', saldo: 500000 },
+                { id: 2, nama: 'Rekening Bank', saldo: 2500000 }
+            ],
+            transaksi: []
         };
 
         function saveDB() {
-            localStorage.setItem('maspeww_mobile_db', JSON.stringify(db));
+            localStorage.setItem('maspeww_db', JSON.stringify(db));
         }
 
-        function formatRupiah(angka) {
-            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(angka);
-        }
-
-        function formatNoRek(no) {
-            return no ? no.replace(/(\d{4})(?=\d)/g, '$1 ') : '-';
-        }
-
-        // --- SISTEM TAB ---
-        function switchTab(tabId, el) {
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-            
+        // --- NAVIGASI TAB ---
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.getElementById('tab-' + tabId).classList.add('active');
-            el.classList.add('active');
-            window.scrollTo(0, 0);
+
+            // Update Navigasi HP
+            document.querySelectorAll('.bottom-nav .nav-item').forEach(el => el.classList.remove('active'));
+            let activeNav = document.getElementById('nav-' + tabId.substring(0, 3));
+            if (activeNav) activeNav.classList.add('active');
+
+            // Update Navigasi Desktop
+            document.querySelectorAll('.desktop-nav button').forEach(el => el.classList.remove('active'));
+            let activeDesk = document.getElementById('btn-' + tabId.substring(0, 3));
+            if (activeDesk) activeDesk.classList.add('active');
         }
 
-        // Set Default Tanggal Hari Ini
-        document.getElementById('trTgl').valueAsDate = new Date();
-
-        // --- REKENING ---
-        function tambahRekening() {
-            let nama = document.getElementById('bankName').value.trim();
-            let holder = document.getElementById('bankHolder').value.trim();
-            let nomor = document.getElementById('bankNumber').value.trim();
-            let saldo = parseFloat(document.getElementById('bankBalance').value) || 0;
-
-            if (!nama) {
-                alert('Nama rekening wajib diisi!');
-                return;
-            }
-
-            db.rekening.push({ id: Date.now(), nama, holder, nomor, saldo });
-            saveDB();
-            renderAll();
-
-            document.getElementById('bankName').value = '';
-            document.getElementById('bankHolder').value = '';
-            document.getElementById('bankNumber').value = '';
-            document.getElementById('bankBalance').value = '';
-            alert('Rekening berhasil ditambahkan!');
+        // Deteksi Tampilan untuk Desktop Navigation
+        if (window.innerWidth >= 768) {
+            document.getElementById('desktopNav').style.display = 'flex';
         }
 
-        function hapusRekening(id) {
-            if (confirm('Hapus rekening ini?')) {
-                db.rekening = db.rekening.filter(r => r.id !== id);
-                saveDB();
-                renderAll();
-            }
+        // Format Rupiah
+        function formatRupiah(angka) {
+            return 'Rp ' + Number(angka).toLocaleString('id-ID');
         }
 
-        function renderRekening() {
-            let tbody = document.getElementById('rekeningTableBody');
-            let select = document.getElementById('trRekening');
-            tbody.innerHTML = '';
-            select.innerHTML = '';
+        // Set tanggal hari ini default pada form
+        document.getElementById('trxTanggal').valueAsDate = new Date();
 
-            if (db.rekening.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--text-muted);">Belum ada rekening aktif</td></tr>`;
-                return;
-            }
-
-            db.rekening.forEach(r => {
-                tbody.innerHTML += `
-                    <tr>
-                        <td><b>${r.nama}</b><br><span style="font-size:10px; color:var(--text-muted);">${formatNoRek(r.nomor)}</span></td>
-                        <td>${r.holder || '-'}</td>
-                        <td class="text-right" style="color:var(--accent-blue);">${formatRupiah(r.saldo)}</td>
-                        <td class="text-right">
-                            <button class="btn btn-red btn-sm" onclick="hapusRekening(${r.id})">Hapus</button>
-                        </td>
-                    </tr>
-                `;
-                select.innerHTML += `<option value="${r.id}">${r.nama} (${formatRupiah(r.saldo)})</option>`;
-            });
-        }
-
-        // --- TRANSAKSI ---
+        // --- KATEGORI ---
         const kategoriList = {
-            'Masuk': ['Gaji / Pendapatan', 'Bonus', 'Hasil Investasi', 'Piutang', 'Lain-lain (Masuk)'],
-            'Keluar': ['Makan & Minum', 'Transportasi', 'Belanja Bulanan', 'Tagihan / Utilitas', 'Hiburan', 'Kesehatan', 'Lain-lain (Keluar)'],
-            'BUY GOLD': ['Investasi Logam Mulia (Emas)']
+            'Masuk': ['Gaji', 'Bonus', 'Investasi', 'Lainnya'],
+            'Keluar': ['Makan & Minum', 'Transportasi', 'Belanja', 'Tagihan', 'Hiburan', 'Lainnya'],
+            'Emas': ['Tabungan Emas Fisik', 'Digital Gold']
         };
 
         function updateKategoriOptions() {
-            let jenis = document.getElementById('trJenis').value;
-            let katSelect = document.getElementById('trKategori');
+            let jenis = document.getElementById('trxJenis').value;
+            let katSelect = document.getElementById('trxKategori');
             let groupGram = document.getElementById('groupGram');
 
             katSelect.innerHTML = '';
-            kategoriList[jenis].forEach(k => {
-                katSelect.innerHTML += `<option value="${k}">${k}</option>`;
+            kategoriList[jenis].forEach(kat => {
+                let opt = document.createElement('option');
+                opt.value = kat;
+                opt.textContent = kat;
+                katSelect.appendChild(opt);
             });
 
-            groupGram.style.display = (jenis === 'BUY GOLD') ? 'block' : 'none';
-        }
-
-        function catatTransaksi() {
-            let tgl = document.getElementById('trTgl').value;
-            let jenis = document.getElementById('trJenis').value;
-            let kategori = document.getElementById('trKategori').value;
-            let rekeningId = parseInt(document.getElementById('trRekening').value);
-            let nominal = parseFloat(document.getElementById('trNominal').value) || 0;
-            let gram = parseFloat(document.getElementById('trGram').value) || 0;
-            let ket = document.getElementById('trKet').value.trim();
-            let fileInput = document.getElementById('trFile');
-
-            if (!tgl || !nominal || !rekeningId) {
-                alert('Tanggal, Rekening, dan Nominal wajib diisi!');
-                return;
-            }
-
-            let rekening = db.rekening.find(r => r.id === rekeningId);
-            if (!rekening) {
-                alert('Rekening tidak ditemukan!');
-                return;
-            }
-
-            if (jenis === 'Masuk') {
-                rekening.saldo += nominal;
-            } else if (jenis === 'Keluar' || jenis === 'BUY GOLD') {
-                if (rekening.saldo < nominal) {
-                    alert('Saldo rekening tidak mencukupi!');
-                    return;
-                }
-                rekening.saldo -= nominal;
-            }
-
-            let reader = new FileReader();
-            if (fileInput.files && fileInput.files[0]) {
-                reader.onload = function (e) {
-                    simpanDataFinal(tgl, jenis, kategori, rekeningId, nominal, gram, ket, e.target.result);
-                };
-                reader.readAsDataURL(fileInput.files[0]);
+            if (jenis === 'Emas') {
+                groupGram.style.display = 'block';
+                document.getElementById('trxGram').required = true;
             } else {
-                simpanDataFinal(tgl, jenis, kategori, rekeningId, nominal, gram, ket, '');
+                groupGram.style.display = 'none';
+                document.getElementById('trxGram').required = false;
             }
         }
 
-        function simpanDataFinal(tgl, jenis, kategori, rekeningId, nominal, gram, ket, proof) {
-            db.transaksi.push({ id: Date.now(), tgl, jenis, kategori, rekeningId, nominal, gram, ket, proof });
-            db.transaksi.sort((a, b) => new Date(a.tgl) - new Date(b.tgl));
-
-            saveDB();
-            renderAll();
-
-            document.getElementById('trNominal').value = '';
-            document.getElementById('trGram').value = '';
-            document.getElementById('trKet').value = '';
-            document.getElementById('trFile').value = '';
-            alert('Transaksi berhasil dicatat!');
-        }
-
-        function hapusTransaksi(id) {
-            if (confirm('Batalkan transaksi ini? Saldo akan dikembalikan.')) {
-                let tr = db.transaksi.find(t => t.id === id);
-                if (tr) {
-                    let rekening = db.rekening.find(r => r.id === tr.rekeningId);
-                    if (rekening) {
-                        if (tr.jenis === 'Masuk') rekening.saldo -= tr.nominal;
-                        else if (tr.jenis === 'Keluar' || tr.jenis === 'BUY GOLD') rekening.saldo += tr.nominal;
-                    }
-                }
-                db.transaksi = db.transaksi.filter(t => t.id !== id);
-                saveDB();
-                renderAll();
-            }
-        }
-
-        function renderTransaksi() {
-            let tbody = document.getElementById('transaksiTableBody');
-            let dashTbody = document.getElementById('dashTableBody');
-            let keyword = document.getElementById('searchKeyword') ? document.getElementById('searchKeyword').value.toLowerCase() : '';
+        // --- RENDER REKENING ---
+        function renderRekening() {
+            let rekSelect = document.getElementById('trxRekening');
+            let rekContainer = document.getElementById('rekeningListContainer');
             
-            tbody.innerHTML = '';
-            dashTbody.innerHTML = '';
+            rekSelect.innerHTML = '';
+            rekContainer.innerHTML = '';
 
-            let filtered = db.transaksi.filter(t => {
-                let rek = db.rekening.find(r => r.id === t.rekeningId);
-                let rekName = rek ? rek.nama.toLowerCase() : '';
-                return t.kategori.toLowerCase().includes(keyword) || 
-                       t.ket.toLowerCase().includes(keyword) || 
-                       rekName.includes(keyword) || t.tgl.includes(keyword);
-            }).reverse();
+            db.rekening.forEach(r => {
+                // Dropdown Form
+                let opt = document.createElement('option');
+                opt.value = r.id;
+                opt.textContent = r.nama;
+                rekSelect.appendChild(opt);
 
-            if (filtered.length === 0) {
-                let empty = `<tr><td colspan="8" style="text-align: center; color: var(--text-muted);">Tidak ada mutasi transaksi</td></tr>`;
-                tbody.innerHTML = empty;
-                dashTbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--text-muted);">Belum ada mutasi</td></tr>`;
-                return;
-            }
-
-            filtered.forEach((t, index) => {
-                let rek = db.rekening.find(r => r.id === t.rekeningId);
-                let rekLabel = rek ? rek.nama : 'Dihapus';
-                let isMasuk = t.jenis === 'Masuk';
-                let badgeClass = isMasuk ? 'badge-masuk' : (t.jenis === 'BUY GOLD' ? 'badge-gold' : 'badge-keluar');
-                let nominalMasuk = isMasuk ? formatRupiah(t.nominal) : '-';
-                let nominalKeluar = !isMasuk ? formatRupiah(t.nominal) : '-';
-                let proofBtn = t.proof ? `<button class="btn btn-sm btn-outline" onclick="document.getElementById('imgProofTarget').src='${t.proof}';document.getElementById('proofModal').style.display='flex'">Lihat</button>` : '-';
-
-                let row = `
-                    <tr>
-                        <td>${t.tgl}</td>
-                        <td>${rekLabel}</td>
-                        <td><span class="badge ${badgeClass}">${t.jenis}</span></td>
-                        <td><b>${t.kategori}</b><br><span style="font-size: 10px; color: var(--text-muted);">${t.ket || '-'}${t.gram ? ' (' + t.gram + 'gr)' : ''}</span></td>
-                        <td class="text-right txt-masuk">${nominalMasuk}</td>
-                        <td class="text-right txt-keluar">${nominalKeluar}</td>
-                        <td>${proofBtn}</td>
-                        <td class="text-right">
-                            <button class="btn btn-red btn-sm" onclick="hapusTransaksi(${t.id})">Hapus</button>
-                        </td>
-                    </tr>
-                `;
-                tbody.innerHTML += row;
-
-                if (index < 5) {
-                    dashTbody.innerHTML += `
-                        <tr>
-                            <td>${t.tgl}</td>
-                            <td>${rekLabel}</td>
-                            <td><b>${t.kategori}</b><br><span style="font-size:10px; color:var(--text-muted);">${t.ket || ''}</span></td>
-                            <td class="text-right txt-masuk">${nominalMasuk}</td>
-                            <td class="text-right txt-keluar">${nominalKeluar}</td>
-                            <td>${proofBtn}</td>
-                        </tr>
-                    `;
-                }
-            });
-        }
-
-        // --- DASHBOARD & LAPORAN ---
-        function renderDashboardStats() {
-            let totalSaldo = db.rekening.reduce((acc, r) => acc + r.saldo, 0);
-            let now = new Date();
-            let currentMonth = String(now.getMonth() + 1).padStart(2, '0');
-            let currentYear = String(now.getFullYear());
-
-            let totalMasuk = 0, totalKeluar = 0, totalGoldGram = 0, totalGoldRp = 0;
-
-            db.transaksi.forEach(t => {
-                let [thn, bln] = t.tgl.split('-');
-                if (thn === currentYear && bln === currentMonth) {
-                    if (t.jenis === 'Masuk') totalMasuk += t.nominal;
-                    if (t.jenis === 'Keluar') totalKeluar += t.nominal;
-                }
-                if (t.jenis === 'BUY GOLD') {
-                    totalGoldGram += (t.gram || 0);
-                    totalGoldRp += t.nominal;
-                }
-            });
-
-            document.getElementById('dashTotalSaldo').innerText = formatRupiah(totalSaldo);
-            document.getElementById('dashMasuk').innerText = formatRupiah(totalMasuk);
-            document.getElementById('dashKeluar').innerText = formatRupiah(totalKeluar);
-            document.getElementById('dashTabungan').innerText = `${totalGoldGram.toFixed(2)} Gram (${formatRupiah(totalGoldRp)})`;
-            document.getElementById('dashSisa').innerText = formatRupiah(totalMasuk - totalKeluar);
-        }
-
-        function renderLaporan() {
-            let bulan = document.getElementById('lapBulan').value;
-            let tahun = document.getElementById('lapTahun').value;
-
-            let totalMasuk = 0, totalKeluar = 0, totalGold = 0;
-            let kategoriMap = {};
-
-            db.transaksi.forEach(t => {
-                let [thn, bln] = t.tgl.split('-');
-                if (thn === tahun && bln === bulan) {
-                    if (t.jenis === 'Masuk') totalMasuk += t.nominal;
-                    if (t.jenis === 'Keluar') {
-                        totalKeluar += t.nominal;
-                        kategoriMap[t.kategori] = (kategoriMap[t.kategori] || 0) + t.nominal;
-                    }
-                    if (t.jenis === 'BUY GOLD') totalGold += t.nominal;
-                }
-            });
-
-            document.getElementById('lapTotalMasuk').innerText = formatRupiah(totalMasuk);
-            document.getElementById('lapTotalKeluar').innerText = formatRupiah(totalKeluar);
-            document.getElementById('lapTotalTabungan').innerText = formatRupiah(totalGold);
-            document.getElementById('lapSisaUang').innerText = formatRupiah(totalMasuk - totalKeluar);
-
-            let katContainer = document.getElementById('kategoriSummaryContainer');
-            katContainer.innerHTML = '';
-            let keys = Object.keys(kategoriMap);
-
-            if (keys.length === 0) {
-                katContainer.innerHTML = `<p style="font-size: 12px; color: var(--text-muted);">Tidak ada pengeluaran pada periode ini.</p>`;
-                return;
-            }
-
-            keys.forEach(k => {
-                let val = kategoriMap[k];
-                let percent = totalKeluar > 0 ? ((val / totalKeluar) * 100).toFixed(1) : 0;
-                katContainer.innerHTML += `
-                    <div>
-                        <div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 3px;">
-                            <span><b>${k}</b></span>
-                            <span>${formatRupiah(val)} (${percent}%)</span>
+                // List Card Rekening
+                rekContainer.innerHTML += `
+                    <div class="list-item">
+                        <div>
+                            <b>${r.nama}</b>
                         </div>
-                        <div style="width: 100%; background: var(--bg-input); height: 6px; border-radius: 3px; overflow: hidden;">
-                            <div style="width: ${percent}%; background: var(--accent-red); height: 100%;"></div>
+                        <div style="text-align: right;">
+                            <b class="txt-masuk">${formatRupiah(r.saldo)}</b><br>
+                            <button onclick="hapusRekening(${r.id})" style="background:none; color:var(--accent-red); width:auto; padding:2px 5px; font-size:11px; margin-top:3px;">Hapus</button>
                         </div>
                     </div>
                 `;
             });
         }
 
-        // --- BACKUP & RESTORE ---
+        // --- TAMBAH & HAPUS REKENING ---
+        function handleTambahRekening(e) {
+            e.preventDefault();
+            let nama = document.getElementById('rekNama').value;
+            let saldo = parseFloat(document.getElementById('rekSaldo').value);
+
+            let newRek = {
+                id: Date.now(),
+                nama: nama,
+                saldo: saldo
+            };
+
+            db.rekening.push(newRek);
+            saveDB();
+            renderAll();
+            document.getElementById('formRekening').reset();
+            alert('Rekening berhasil ditambahkan!');
+        }
+
+        function hapusRekening(id) {
+            if (confirm('Yakin ingin menghapus rekening ini?')) {
+                db.rekening = db.rekening.filter(r => r.id !== id);
+                saveDB();
+                renderAll();
+            }
+        }
+
+        // --- TRANSAKSI ---
+        function handleTambahTransaksi(e) {
+            e.preventDefault();
+            let jenis = document.getElementById('trxJenis').value;
+            let rekeningId = parseInt(document.getElementById('trxRekening').value);
+            let kategori = document.getElementById('trxKategori').value;
+            let nominal = parseFloat(document.getElementById('trxNominal').value);
+            let gram = parseFloat(document.getElementById('trxGram').value) || 0;
+            let tgl = document.getElementById('trxTanggal').value;
+            let ket = document.getElementById('trxKet').value;
+
+            let rekening = db.rekening.find(r => r.id === rekeningId);
+            if (!rekening) return alert('Rekening tidak ditemukan!');
+
+            // Sesuaikan Saldo Rekening
+            if (jenis === 'Masuk') {
+                rekening.saldo += nominal;
+            } else if (jenis === 'Keluar' || jenis === 'Emas') {
+                if (rekening.saldo < nominal) {
+                    alert('Saldo pada rekening tidak mencukupi!');
+                    return;
+                }
+                rekening.saldo -= nominal;
+            }
+
+            let newTrx = {
+                id: Date.now(),
+                jenis, rekeningId, kategori, nominal, gram, tgl, ket
+            };
+
+            db.transaksi.unshift(newTrx);
+            saveDB();
+            renderAll();
+            document.getElementById('formTransaksi').reset();
+            document.getElementById('trxTanggal').valueAsDate = new Date();
+            updateKategoriOptions();
+            alert('Transaksi berhasil disimpan!');
+        }
+
+        function hapusTransaksi(id) {
+            if (confirm('Hapus transaksi ini? Saldo akan dikembalikan.')) {
+                let trx = db.transaksi.find(t => t.id === id);
+                if (trx) {
+                    let rekening = db.rekening.find(r => r.id === trx.rekeningId);
+                    if (rekening) {
+                        if (trx.jenis === 'Masuk') rekening.saldo -= trx.nominal;
+                        else if (trx.jenis === 'Keluar' || trx.jenis === 'Emas') rekening.saldo += trx.nominal;
+                    }
+                    db.transaksi = db.transaksi.filter(t => t.id !== id);
+                    saveDB();
+                    renderAll();
+                }
+            }
+        }
+
+        // --- RENDER TRANSAKSI & RIWAYAT ---
+        function renderTransaksi() {
+            let container = document.getElementById('riwayatTransaksiList');
+            container.innerHTML = '';
+
+            if (db.transaksi.length === 0) {
+                container.innerHTML = `<p style="font-size: 12px; color: var(--text-muted);">Belum ada riwayat transaksi.</p>`;
+                return;
+            }
+
+            db.transaksi.forEach(t => {
+                let rek = db.rekening.find(r => r.id === t.rekeningId);
+                let rekName = rek ? rek.nama : 'Dihapus';
+                let warnaClass = t.jenis === 'Masuk' ? 'txt-masuk' : (t.jenis === 'Emas' ? 'txt-emas' : 'txt-keluar');
+                let tanda = t.jenis === 'Masuk' ? '+' : '-';
+
+                container.innerHTML += `
+                    <div class="list-item">
+                        <div>
+                            <b>${t.kategori}</b> (${rekName})<br>
+                            <span style="font-size: 11px; color: var(--text-muted);">${t.tgl} ${t.ket ? '• ' + t.ket : ''}</span>
+                        </div>
+                        <div style="text-align: right;">
+                            <b class="${warnaClass}">${tanda} ${formatRupiah(t.nominal)}</b><br>
+                            ${t.gram > 0 ? `<span class="txt-emas" style="font-size: 11px;">${t.gram} gr</span><br>` : ''}
+                            <button onclick="hapusTransaksi(${t.id})" style="background:none; color:var(--accent-red); width:auto; padding:0; font-size:10px;">Hapus</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // --- DASHBOARD STATS & KATEGORI ---
+        function renderDashboardStats() {
+            let totalSaldo = db.rekening.reduce((acc, r) => acc + r.saldo, 0);
+            let totalEmas = db.transaksi.filter(t => t.jenis === 'Emas').reduce((acc, t) => acc + (t.gram || 0), 0);
+
+            let now = new Date();
+            let bulanIni = now.toISOString().slice(0, 7); // Format: YYYY-MM
+
+            let masukBulanIni = 0;
+            let keluarBulanIni = 0;
+            let kategoriMap = {};
+
+            db.transaksi.forEach(t => {
+                if (t.tgl.startsWith(bulanIni)) {
+                    if (t.jenis === 'Masuk') {
+                        masukBulanIni += t.nominal;
+                    } else if (t.jenis === 'Keluar' || t.jenis === 'Emas') {
+                        keluarBulanIni += t.nominal;
+                        if (t.jenis === 'Keluar') {
+                            kategoriMap[t.kategori] = (kategoriMap[t.kategori] || 0) + t.nominal;
+                        }
+                    }
+                }
+            });
+
+            document.getElementById('dashTotalSaldo').textContent = formatRupiah(totalSaldo);
+            document.getElementById('dashTotalEmas').textContent = totalEmas.toFixed(2) + ' gr';
+            document.getElementById('dashMasuk').textContent = formatRupiah(masukBulanIni);
+            document.getElementById('dashKeluar').textContent = formatRupiah(keluarBulanIni);
+
+            // Render Kategori Summary
+            let katContainer = document.getElementById('kategoriSummaryContainer');
+            katContainer.innerHTML = '';
+
+            let keys = Object.keys(kategoriMap);
+            if (keys.length === 0) {
+                katContainer.innerHTML = `<p style="font-size: 12px; color: var(--text-muted);">Tidak ada pengeluaran pada bulan ini.</p>`;
+                return;
+            }
+
+            keys.forEach(kat => {
+                let nominal = kategoriMap[kat];
+                let persen = keluarBulanIni > 0 ? ((nominal / keluarBulanIni) * 100).toFixed(1) : 0;
+                katContainer.innerHTML += `
+                    <div style="margin-bottom: 8px;">
+                        <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 3px;">
+                            <span>${kat} (${persen}%)</span>
+                            <b class="txt-keluar">${formatRupiah(nominal)}</b>
+                        </div>
+                        <div style="width: 100%; background: var(--bg-input); height: 5px; border-radius: 3px; overflow: hidden;">
+                            <div style="width: ${persen}%; background: var(--accent-red); height: 100%;"></div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // --- BACKUP & EXPORT ---
         function downloadJSON() {
             let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(db, null, 2));
             let dlAnchor = document.createElement('a');
@@ -854,38 +672,41 @@
                         renderAll();
                         alert('Data berhasil dipulihkan!');
                     } else {
-                        alert('Format file salah!');
+                        alert('Format file tidak valid.');
                     }
                 } catch (err) {
-                    alert('Gagal membaca file!');
+                    alert('Gagal membaca file.');
                 }
             };
             reader.readAsText(file);
         }
 
         function exportCSV() {
-            let csv = "data:text/csv;charset=utf-8,Tanggal,Rekening,Jenis,Kategori,Nominal,Keterangan\r\n";
+            let csv = 'Tanggal,Jenis,Kategori,Rekening,Nominal,Gram,Keterangan\n';
             db.transaksi.forEach(t => {
                 let rek = db.rekening.find(r => r.id === t.rekeningId);
-                csv += `"${t.tgl}","${rek ? rek.nama : ''}","${t.jenis}","${t.kategori}",${t.nominal},"${t.ket}"\r\n`;
+                let rekName = rek ? rek.nama : 'Dihapus';
+                csv += `"${t.tgl}","${t.jenis}","${t.kategori}","${rekName}",${t.nominal},${t.gram || 0},"${t.ket || ''}"\n`;
             });
-            let encodedUri = encodeURI(csv);
-            let link = document.createElement("a");
-            link.setAttribute("href", encodedUri);
-            link.setAttribute("download", "laporan_maspeww.csv");
-            document.body.appendChild(link);
-            link.click();
-            link.remove();
+
+            let blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            let url = URL.createObjectURL(blob);
+            let dlAnchor = document.createElement('a');
+            dlAnchor.setAttribute("href", url);
+            dlAnchor.setAttribute("download", `mutasi_maspeww_${new Date().toISOString().slice(0,10)}.csv`);
+            document.body.appendChild(dlAnchor);
+            dlAnchor.click();
+            dlAnchor.remove();
         }
 
+        // --- GLOBAL RENDER ---
         function renderAll() {
-            renderDashboardStats();
             renderRekening();
             renderTransaksi();
-            renderLaporan();
+            renderDashboardStats();
         }
 
-        // Jalankan saat pertama muat
+        // Jalankan Inisialisasi Pertama
         updateKategoriOptions();
         renderAll();
     </script>
