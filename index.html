@@ -6,8 +6,8 @@
 <title>DASHBOARDMASPEWW - Private Finance</title>
 <style>
 :root {
---bg-main: rgba(7, 9, 14, 0.75);
---bg-card: rgba(15, 23, 42, 0.85);
+--bg-main: rgba(7, 9, 14, 0.85);
+--bg-card: rgba(15, 23, 42, 0.90);
 --bg-input: rgba(30, 41, 59, 0.8);
 --border-color: rgba(255, 255, 255, 0.15);
 --text-main: #f8fafc;
@@ -20,10 +20,11 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
 
-/* BACKGROUND UTAMA HALAMAN DALAM */
+/* BACKGROUND UTAMA HALAMAN DALAM (Disesuaikan agar foto terlihat utuh) */
 body { 
-background: linear-gradient(rgba(7, 9, 14, 0.75), rgba(7, 9, 14, 0.8)), url('https://lh3.googleusercontent.com/d/1QBsCDs2_BQtPZjKECk0_F_SrR6Qi9-F1'); 
-background-size: cover;
+background: #07090e url('https://lh3.googleusercontent.com/d/1QBsCDs2_BQtPZjKECk0_F_SrR6Qi9-F1'); 
+background-size: contain;
+background-repeat: no-repeat;
 background-position: center;
 background-attachment: fixed;
 color: var(--text-main); 
@@ -33,11 +34,12 @@ display: flex;
 font-weight: 500; 
 }
 
-/* BACKGROUND HALAMAN LOGIN */
+/* BACKGROUND HALAMAN LOGIN (Disesuaikan agar foto terlihat utuh) */
 #loginWrapper {
 position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-background: linear-gradient(rgba(7, 9, 14, 0.6), rgba(7, 9, 14, 0.6)), url('https://lh3.googleusercontent.com/d/1QBsCDs2_BQtPZjKECk0_F_SrR6Qi9-F1');
-background-size: cover;
+background: #07090e url('https://lh3.googleusercontent.com/d/1QBsCDs2_BQtPZjKECk0_F_SrR6Qi9-F1');
+background-size: contain;
+background-repeat: no-repeat;
 background-position: center;
 display: flex; z-index: 2000; align-items: center; justify-content: center;
 }
