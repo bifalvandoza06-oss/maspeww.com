@@ -132,7 +132,7 @@ th { background: var(--bg-input); color: var(--text-muted); font-weight: 700; te
 .c-bar.gold { background: var(--accent-gold); }
 .chart-label { font-size: 11px; color: var(--text-muted); margin-top: 8px; font-weight: 700; text-align: center; }
 
-/* MODAL BUKTI & EDIT */
+/* MODAL BUKTI */
 #proofModal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 3000; align-items: center; justify-content: center; }
 .modal-card { background: var(--bg-card); width: 450px; padding: 30px; border-radius: 12px; border: 1px solid var(--border-color); position: relative; }
 .modal-card img { max-width: 100%; max-height: 70vh; border-radius: 8px; border: 1px solid var(--border-color); display: block; margin: 0 auto; }
@@ -173,7 +173,6 @@ th { background: var(--bg-input); color: var(--text-muted); font-weight: 700; te
 
 <!-- MAIN APP WRAPPER -->
 <div id="appWrapper">
-<!-- MODAL BUKTI TRANSFER (PROOF) -->
 <div id="proofModal" onclick="this.style.display='none'">
 <div class="modal-card" onclick="event.stopPropagation()">
 <button class="close-modal" onclick="document.getElementById('proofModal').style.display='none'">✕</button>
@@ -219,32 +218,15 @@ th { background: var(--bg-input); color: var(--text-muted); font-weight: 700; te
 <!-- 1. DASHBOARD TAB -->
 <div id="tab-dashboard" class="tab-content active">
 <div class="stats-grid">
-<div class="stat-box blue">
-<p>Total Saldo Rekening</p>
-<h3 id="dashTotalSaldo">Rp 0</h3>
-</div>
-<div class="stat-box green">
-<p>Pemasukan Bulan Ini</p>
-<h3 id="dashMasuk">Rp 0</h3>
-</div>
-<div class="stat-box red">
-<p>Pengeluaran Bulan Ini</p>
-<h3 id="dashKeluar">Rp 0</h3>
-</div>
-<div class="stat-box gold">
-<p>Akumulasi Total Emas</p>
-<h3 id="dashTabungan">0 Gram (Rp 0)</h3>
-</div>
-<div class="stat-box blue">
-<p>Sisa Uang Bulan Ini</p>
-<h3 id="dashSisa">Rp 0</h3>
-</div>
+<div class="stat-box blue"><p>Total Saldo Rekening</p><h3 id="dashTotalSaldo">Rp 0</h3></div>
+<div class="stat-box green"><p>Pemasukan Bulan Ini</p><h3 id="dashMasuk">Rp 0</h3></div>
+<div class="stat-box red"><p>Pengeluaran Bulan Ini</p><h3 id="dashKeluar">Rp 0</h3></div>
+<div class="stat-box gold"><p>Akumulasi Total Emas</p><h3 id="dashTabungan">0 Gram (Rp 0)</h3></div>
+<div class="stat-box blue"><p>Sisa Uang Bulan Ini</p><h3 id="dashSisa">Rp 0</h3></div>
 </div>
 
 <div class="panel">
-<div class="panel-header">
-<h3>Mutasi & Transaksi Terbaru</h3>
-</div>
+<div class="panel-header"><h3>Mutasi & Transaksi Terbaru</h3></div>
 <table>
 <thead>
 <tr>
@@ -306,10 +288,7 @@ th { background: var(--bg-input); color: var(--text-muted); font-weight: 700; te
 <option value="BUY GOLD">BUY GOLD (Beli Emas)</option>
 </select>
 </div>
-<div class="input-group">
-<label>Kategori</label>
-<select id="trKategori"></select>
-</div>
+<div class="input-group"><label>Kategori</label><select id="trKategori"></select></div>
 <div class="input-group"><label>Rekening Sumber / Tujuan</label><select id="trRekening"></select></div>
 <div class="input-group"><label>Nominal Pembayaran / Harga (Rp)</label><input type="number" id="trNominal" placeholder="0"></div>
 <div class="input-group" id="groupGram" style="display: none;"><label>Total Gram Emas</label><input type="number" step="0.01" id="trGram" placeholder="Contoh: 1.5"></div>
@@ -373,7 +352,6 @@ th { background: var(--bg-input); color: var(--text-muted); font-weight: 700; te
 </div>
 </div>
 
-<!-- DIAGRAM GRAFIK VISUAL LAPORAN BULANAN -->
 <div class="panel">
 <div class="panel-header"><h3>Diagram Perbandingan Keuangan Bulanan</h3></div>
 <div style="display: flex; gap: 20px; justify-content: center; font-size: 12px; margin-bottom: 10px;">
@@ -382,24 +360,9 @@ th { background: var(--bg-input); color: var(--text-muted); font-weight: 700; te
 <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: var(--accent-gold); display: inline-block; border-radius: 3px;"></span> Buy Gold</span>
 </div>
 <div class="chart-container">
-<div class="chart-bar-group">
-<div class="chart-bars">
-<div id="barChartMasuk" class="c-bar masuk" style="height: 0%;"></div>
-</div>
-<div class="chart-label">Pemasukan</div>
-</div>
-<div class="chart-bar-group">
-<div class="chart-bars">
-<div id="barChartKeluar" class="c-bar keluar" style="height: 0%;"></div>
-</div>
-<div class="chart-label">Pengeluaran</div>
-</div>
-<div class="chart-bar-group">
-<div class="chart-bars">
-<div id="barChartGold" class="c-bar gold" style="height: 0%;"></div>
-</div>
-<div class="chart-label">Buy Gold</div>
-</div>
+<div class="chart-bar-group"><div class="chart-bars"><div id="barChartMasuk" class="c-bar masuk" style="height: 0%;"></div></div><div class="chart-label">Pemasukan</div></div>
+<div class="chart-bar-group"><div class="chart-bars"><div id="barChartKeluar" class="c-bar keluar" style="height: 0%;"></div></div><div class="chart-label">Pengeluaran</div></div>
+<div class="chart-bar-group"><div class="chart-bars"><div id="barChartGold" class="c-bar gold" style="height: 0%;"></div></div><div class="chart-label">Buy Gold</div></div>
 </div>
 </div>
 
@@ -421,7 +384,6 @@ th { background: var(--bg-input); color: var(--text-muted); font-weight: 700; te
 </div>
 <button class="btn btn-blue" onclick="tambahTarget()">Simpan Target Tabungan</button>
 </div>
-
 <div class="panel">
 <div class="panel-header"><h3>Daftar Progress Target Tabungan</h3></div>
 <div id="targetContainer" style="display: flex; flex-direction: column; gap: 16px;"></div>
@@ -433,7 +395,7 @@ th { background: var(--bg-input); color: var(--text-muted); font-weight: 700; te
 <div class="panel">
 <div class="panel-header"><h3>Backup & Restore Data JSON Permanen</h3></div>
 <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">
-Seluruh data mutasi, saldo rekening, dan investasi emas tersimpan permanen di browser Anda. Anda dapat mengunduh atau memulihkan data kapan saja.
+Setiap kali ada perubahan data, file JSON otomatis diperbarui ke perangkat Anda. Anda juga bisa mendownload manual atau melakukan restore data di sini.
 </p>
 <div class="flex-row">
 <button class="btn btn-blue" onclick="downloadJSON()">Download Backup JSON</button>
@@ -449,18 +411,12 @@ Restore Data JSON <input type="file" id="restoreFile" accept=".json" style="disp
 </div>
 
 <script>
-// --- DATABASE LOCALSTORAGE UTAMA ---
-let db = JSON.parse(localStorage.getItem('maspeww_db_v4')) || {
-rekening: [
-{ id: 1, nama: 'BCA', holder: 'Rekening Utama', nomor: '1234561828', saldo: 15000000 }
-],
+let db = JSON.parse(localStorage.getItem('maspeww_db_v5')) || {
+rekening: [{ id: 1, nama: 'BCA', holder: 'Rekening Utama', nomor: '1234561828', saldo: 15000000 }],
 transaksi: [],
-target: [
-{ nama: 'Dana Darurat', nominal: 10000000, terkumpul: 4000000, deadline: '2026-12-31' }
-]
+target: [{ nama: 'Dana Darurat', nominal: 10000000, terkumpul: 4000000, deadline: '2026-12-31' }]
 };
 
-// --- AUTENTIKASI ---
 if (sessionStorage.getItem('maspeww_logged') === 'true') {
 bukaAplikasi();
 }
@@ -495,21 +451,19 @@ document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('activ
 document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
 document.getElementById('tab-' + tabId).classList.add('active');
 el.classList.add('active');
-
 let titles = {
-dashboard: 'Dashboard Keuangan',
-rekening: 'Manajemen Data Rekening',
-transaksi: 'Pencatatan Mutasi Transaksi',
-laporan: 'Laporan Keuangan Bulanan',
-tabungan: 'Target Tabungan Pribadi',
-backup: 'Backup & Restore Data'
+dashboard: 'Dashboard Keuangan', rekening: 'Manajemen Data Rekening',
+transaksi: 'Pencatatan Mutasi Transaksi', laporan: 'Laporan Keuangan Bulanan',
+tabungan: 'Target Tabungan Pribadi', backup: 'Backup & Restore Data'
 };
 document.getElementById('pageTitle').innerText = titles[tabId];
 renderAll();
 }
 
 function saveDB() {
-localStorage.setItem('maspeww_db_v4', JSON.stringify(db));
+localStorage.setItem('maspeww_db_v5', JSON.stringify(db));
+// Auto-Backup otomatis diunduh agar data permanen dan aman
+autoBackupJSON();
 }
 
 function formatRupiah(angka) {
@@ -519,22 +473,15 @@ return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maxi
 function formatNoRek(no) {
 if (!no) return '****1828';
 let str = no.toString();
-if (str.length <= 4) return '****' + str;
-return '****' + str.slice(-4);
+return str.length <= 4 ? '****' + str : '****' + str.slice(-4);
 }
 
-// --- REKENING ---
 function tambahRekening() {
 let nama = document.getElementById('bankName').value.trim();
 let holder = document.getElementById('bankHolder').value.trim();
 let nomor = document.getElementById('bankNumber').value.trim();
 let saldo = parseFloat(document.getElementById('bankBalance').value) || 0;
-
-if (!nama || !nomor) {
-alert('Nama Bank dan Nomor Rekening wajib diisi!');
-return;
-}
-
+if (!nama || !nomor) { alert('Nama Bank dan Nomor Rekening wajib diisi!'); return; }
 db.rekening.push({ id: Date.now(), nama, holder, nomor, saldo });
 saveDB();
 renderAll();
@@ -542,7 +489,7 @@ document.getElementById('bankName').value = '';
 document.getElementById('bankHolder').value = '';
 document.getElementById('bankNumber').value = '';
 document.getElementById('bankBalance').value = '';
-alert('Rekening berhasil ditambahkan!');
+alert('Rekening berhasil ditambahkan dan data otomatis diamankan!');
 }
 
 function hapusRekening(id) {
@@ -553,29 +500,16 @@ renderAll();
 }
 }
 
-// --- TRANSAKSI & BUY GOLD ---
 function updateKategoriOptions() {
 let jenis = document.getElementById('trJenis').value;
 let katSelect = document.getElementById('trKategori');
 let groupGram = document.getElementById('groupGram');
 katSelect.innerHTML = '';
-
-let options = [];
-if (jenis === 'Masuk') {
-options = ['Gaji', 'Bonus', 'Transfer', 'Pendapatan lainnya'];
-groupGram.style.display = 'none';
-} else if (jenis === 'Keluar') {
-options = ['Makan', 'Transportasi', 'Belanja', 'Tagihan', 'Hiburan', 'Keluarga', 'Tabungan', 'Lainnya'];
-groupGram.style.display = 'none';
-} else if (jenis === 'BUY GOLD') {
-options = ['BUY GOLD'];
-groupGram.style.display = 'flex';
-}
-
+let options = jenis === 'Masuk' ? ['Gaji', 'Bonus', 'Transfer', 'Pendapatan lainnya'] :
+jenis === 'Keluar' ? ['Makan', 'Transportasi', 'Belanja', 'Tagihan', 'Hiburan', 'Keluarga', 'Tabungan', 'Lainnya'] : ['BUY GOLD'];
+groupGram.style.display = jenis === 'BUY GOLD' ? 'flex' : 'none';
 options.forEach(opt => {
-let el = document.createElement('option');
-el.value = opt;
-el.innerText = opt;
+let el = document.createElement('option'); el.value = opt; el.innerText = opt;
 katSelect.appendChild(el);
 });
 }
@@ -590,42 +524,22 @@ let gram = parseFloat(document.getElementById('trGram').value) || 0;
 let ket = document.getElementById('trKet').value.trim();
 let fileInput = document.getElementById('trFile').files[0];
 
-if (!tgl || nominal <= 0 || !rekId) {
-alert('Pastikan Tanggal, Rekening, dan Nominal valid!');
-return;
-}
-
+if (!tgl || nominal <= 0 || !rekId) { alert('Pastikan Tanggal, Rekening, dan Nominal valid!'); return; }
 let targetRek = db.rekening.find(r => r.id === rekId);
-if (!targetRek) {
-alert('Rekening tidak ditemukan!');
-return;
-}
+if (!targetRek) { alert('Rekening tidak ditemukan!'); return; }
+if ((jenis === 'Keluar' || jenis === 'BUY GOLD') && targetRek.saldo < nominal) { alert('Saldo rekening tidak mencukupi!'); return; }
 
-if ((jenis === 'Keluar' || jenis === 'BUY GOLD') && targetRek.saldo < nominal) {
-alert('Saldo pada rekening terpilih tidak mencukupi!');
-return;
-}
-
-if (jenis === 'Masuk') {
-targetRek.saldo += nominal;
-} else if (jenis === 'Keluar' || jenis === 'BUY GOLD') {
-targetRek.saldo -= nominal;
-}
+if (jenis === 'Masuk') targetRek.saldo += nominal;
+else targetRek.saldo -= nominal;
 
 function finalizeTransaction(proofBase64) {
 db.transaksi.push({
-id: Date.now(),
-tanggal: tgl,
-rekeningId: rekId,
+id: Date.now(), tanggal: tgl, rekeningId: rekId,
 rekeningNama: targetRek.nama + ' (' + targetRek.holder + ')',
-jenis: jenis,
-kategori: kategori,
+jenis: jenis, kategori: kategori,
 keterangan: jenis === 'BUY GOLD' ? `Beli Emas ${gram} Gram - ${ket}` : ket,
-nominal: nominal,
-gram: jenis === 'BUY GOLD' ? gram : 0,
-bukti: proofBase64 || ''
+nominal: nominal, gram: jenis === 'BUY GOLD' ? gram : 0, bukti: proofBase64 || ''
 });
-
 saveDB();
 renderAll();
 document.getElementById('trNominal').value = '';
@@ -633,27 +547,25 @@ document.getElementById('trGram').value = '';
 document.getElementById('trKet').value = '';
 document.getElementById('trFile').value = '';
 document.getElementById('trTgl').valueAsDate = new Date();
-alert('Transaksi berhasil dicatat dan saldo diperbarui secara permanen!');
+alert('Transaksi berhasil dicatat & data otomatis disimpan permanen!');
 }
 
 if (fileInput) {
 let reader = new FileReader();
-reader.onload = function(e) { finalizeTransaction(e.target.result); };
-reader.onerror = function() { finalizeTransaction(''); };
+reader.onload = e => finalizeTransaction(e.target.result);
+reader.onerror = () => finalizeTransaction('');
 reader.readAsDataURL(fileInput);
-} else {
-finalizeTransaction('');
-}
+} else { finalizeTransaction(''); }
 }
 
 function hapusTransaksi(id) {
-if (confirm('Yakin ingin menghapus transaksi ini? Saldo rekening akan dikembalikan seperti semula.')) {
+if (confirm('Hapus transaksi ini? Saldo rekening akan dikembalikan.')) {
 let trx = db.transaksi.find(t => t.id === id);
 if (trx) {
 let rek = db.rekening.find(r => r.id === trx.rekeningId);
 if (rek) {
 if (trx.jenis === 'Masuk') rek.saldo -= trx.nominal;
-else if (trx.jenis === 'Keluar' || trx.jenis === 'BUY GOLD') rek.saldo += trx.nominal;
+else rek.saldo += trx.nominal;
 }
 db.transaksi = db.transaksi.filter(t => t.id !== id);
 saveDB();
@@ -667,30 +579,19 @@ document.getElementById('imgProofTarget').src = url;
 document.getElementById('proofModal').style.display = 'flex';
 }
 
-// --- RENDER SEMUA KOMPONEN ---
 function renderAll() {
 let rekSelect = document.getElementById('trRekening');
 rekSelect.innerHTML = '';
 db.rekening.forEach(r => {
 let opt = document.createElement('option');
-opt.value = r.id;
-opt.innerText = `${r.nama} - ${r.holder} (${formatNoRek(r.nomor)})`;
+opt.value = r.id; opt.innerText = `${r.nama} - ${r.holder} (${formatNoRek(r.nomor)})`;
 rekSelect.appendChild(opt);
 });
 
-let rekHTML = '';
-let totalSaldoGlobal = 0;
+let rekHTML = ''; let totalSaldoGlobal = 0;
 db.rekening.forEach(r => {
 totalSaldoGlobal += r.saldo;
-rekHTML += `<tr>
-<td>${r.nama}</td>
-<td>${r.holder}</td>
-<td>${formatNoRek(r.nomor)}</td>
-<td class="text-right txt-saldo">${formatRupiah(r.saldo)}</td>
-<td class="text-right">
-<button class="btn btn-red btn-sm" onclick="hapusRekening(${r.id})">Hapus</button>
-</td>
-</tr>`;
+rekHTML += `<tr><td>${r.nama}</td><td>${r.holder}</td><td>${formatNoRek(r.nomor)}</td><td class="text-right txt-saldo">${formatRupiah(r.saldo)}</td><td class="text-right"><button class="btn btn-red btn-sm" onclick="hapusRekening(${r.id})">Hapus</button></td></tr>`;
 });
 document.getElementById('rekeningTableBody').innerHTML = rekHTML || '<tr><td colspan="5" style="text-align:center;">Belum ada rekening.</td></tr>';
 document.getElementById('dashTotalSaldo').innerText = formatRupiah(totalSaldoGlobal);
@@ -698,16 +599,10 @@ document.getElementById('dashTotalSaldo').innerText = formatRupiah(totalSaldoGlo
 let now = new Date();
 let curMonth = String(now.getMonth() + 1).padStart(2, '0');
 let curYear = String(now.getFullYear());
-
-let tMasukBulanIni = 0;
-let tKeluarBulanIni = 0;
-let tBuyGoldBulanIni = 0;
-let totalGramEmas = 0;
+let tMasukBulanIni = 0, tKeluarBulanIni = 0, tBuyGoldBulanIni = 0, totalGramEmas = 0;
 
 db.transaksi.forEach(t => {
-if (t.jenis === 'BUY GOLD') {
-totalGramEmas += (t.gram || 0);
-}
+if (t.jenis === 'BUY GOLD') totalGramEmas += (t.gram || 0);
 let [y, m] = t.tanggal.split('-');
 if (m === curMonth && y === curYear) {
 if (t.jenis === 'Masuk') tMasukBulanIni += t.nominal;
@@ -730,35 +625,19 @@ renderTarget();
 function renderTabelMutasi(elementId, limit5 = false) {
 let tbody = document.getElementById(elementId);
 let keyword = document.getElementById('searchKeyword') ? document.getElementById('searchKeyword').value.toLowerCase() : '';
-
 let sortedTrx = [...db.transaksi].sort((a,b) => new Date(a.tanggal) - new Date(b.tanggal));
-
-let runningSaldo = 0;
-let renderedList = [];
+let runningSaldo = 0, renderedList = [];
 
 sortedTrx.forEach(t => {
-if (t.jenis === 'Masuk') runningSaldo += t.nominal;
-else runningSaldo -= t.nominal;
-
-if (keyword && !t.keterangan.toLowerCase().includes(keyword) && !t.kategori.toLowerCase().includes(keyword)) {
-return;
-}
+if (t.jenis === 'Masuk') runningSaldo += t.nominal; else runningSaldo -= t.nominal;
+if (keyword && !t.keterangan.toLowerCase().includes(keyword) && !t.kategori.toLowerCase().includes(keyword)) return;
 
 let masukStr = t.jenis === 'Masuk' ? formatRupiah(t.nominal) : '-';
 let keluarStr = (t.jenis === 'Keluar' || t.jenis === 'BUY GOLD') ? formatRupiah(t.nominal) : '-';
 let buktiBtn = t.bukti ? `<button class="btn btn-blue btn-sm" onclick="bukaBukti('${t.bukti}')">Lihat Proof</button>` : '-';
 
 renderedList.unshift({
-html: `<tr>
-<td>${t.tanggal}</td>
-<td>${t.rekeningNama}</td>
-<td><span class="badge ${t.jenis === 'Masuk' ? 'badge-masuk' : t.jenis === 'BUY GOLD' ? 'badge-gold' : 'badge-keluar'}">${t.kategori}</span><br><small style="color:var(--text-muted);">${t.keterangan}</small></td>
-<td class="text-right txt-masuk">${masukStr}</td>
-<td class="text-right txt-keluar">${keluarStr}</td>
-<td class="text-right txt-saldo">${formatRupiah(runningSaldo)}</td>
-<td>${buktiBtn}</td>
-${elementId === 'transaksiTableBody' ? `<td class="text-right"><button class="btn btn-red btn-sm" onclick="hapusTransaksi(${t.id})">Hapus</button></td>` : ''}
-</tr>`
+html: `<tr><td>${t.tanggal}</td><td>${t.rekeningNama}</td><td><span class="badge ${t.jenis === 'Masuk' ? 'badge-masuk' : t.jenis === 'BUY GOLD' ? 'badge-gold' : 'badge-keluar'}">${t.kategori}</span><br><small style="color:var(--text-muted);">${t.keterangan}</small></td><td class="text-right txt-masuk">${masukStr}</td><td class="text-right txt-keluar">${keluarStr}</td><td class="text-right txt-saldo">${formatRupiah(runningSaldo)}</td><td>${buktiBtn}</td>${elementId === 'transaksiTableBody' ? `<td class="text-right"><button class="btn btn-red btn-sm" onclick="hapusTransaksi(${t.id})">Hapus</button></td>` : ''}</tr>`
 });
 });
 
@@ -766,29 +645,19 @@ if (limit5) renderedList = renderedList.slice(0, 5);
 tbody.innerHTML = renderedList.map(r => r.html).join('') || `<tr><td colspan="9" style="text-align:center;">Belum ada data transaksi mutasi.</td></tr>`;
 }
 
-function renderTransaksi() {
-renderTabelMutasi('transaksiTableBody', false);
-}
+function renderTransaksi() { renderTabelMutasi('transaksiTableBody', false); }
 
-// --- LAPORAN BULANAN & DIAGRAM GRAFIK ---
 function renderLaporan() {
 let b = document.getElementById('lapBulan').value;
 let y = document.getElementById('lapTahun').value;
-
-let totalM = 0, totalK = 0, totalG = 0;
-let kategoriMap = {};
+let totalM = 0, totalK = 0, totalG = 0, kategoriMap = {};
 
 db.transaksi.forEach(tr => {
 let [trY, trM] = tr.tanggal.split('-');
 if (trM === b && trY === y) {
 if (tr.jenis === 'Masuk') totalM += tr.nominal;
-else if (tr.jenis === 'Keluar') {
-totalK += tr.nominal;
-kategoriMap[tr.kategori] = (kategoriMap[tr.kategori] || 0) + tr.nominal;
-} else if (tr.jenis === 'BUY GOLD') {
-totalG += tr.nominal;
-kategoriMap['BUY GOLD'] = (kategoriMap['BUY GOLD'] || 0) + tr.nominal;
-}
+else if (tr.jenis === 'Keluar') { totalK += tr.nominal; kategoriMap[tr.kategori] = (kategoriMap[tr.kategori] || 0) + tr.nominal; }
+else if (tr.jenis === 'BUY GOLD') { totalG += tr.nominal; kategoriMap['BUY GOLD'] = (kategoriMap['BUY GOLD'] || 0) + tr.nominal; }
 }
 });
 
@@ -797,45 +666,33 @@ document.getElementById('lapTotalKeluar').innerText = formatRupiah(totalK);
 document.getElementById('lapTotalTabungan').innerText = formatRupiah(totalG);
 document.getElementById('lapSisaUang').innerText = formatRupiah(totalM - (totalK + totalG));
 
-// Perhitungan Persentase Tinggi Batang Grafik
 let maxVal = Math.max(totalM, totalK, totalG, 1);
-let hMasuk = (totalM / maxVal) * 100;
-let hKeluar = (totalK / maxVal) * 100;
-let hGold = (totalG / maxVal) * 100;
-
-document.getElementById('barChartMasuk').style.height = (hMasuk > 0 ? Math.max(hMasuk, 10) : 0) + '%';
-document.getElementById('barChartKeluar').style.height = (hKeluar > 0 ? Math.max(hKeluar, 10) : 0) + '%';
-document.getElementById('barChartGold').style.height = (hGold > 0 ? Math.max(hGold, 10) : 0) + '%';
+document.getElementById('barChartMasuk').style.height = Math.round((totalM / maxVal) * 100) + '%';
+document.getElementById('barChartKeluar').style.height = Math.round((totalK / maxVal) * 100) + '%';
+document.getElementById('barChartGold').style.height = Math.round((totalG / maxVal) * 100) + '%';
 
 let katContainer = document.getElementById('kategoriSummaryContainer');
-let katHTML = '';
+let keys = Object.keys(kategoriMap);
+if (keys.length === 0) {
+katContainer.innerHTML = '<p style="font-size: 13px; color: var(--text-muted);">Tidak ada pengeluaran pada periode ini.</p>';
+} else {
 let totalPengeluaranGabungan = totalK + totalG;
-for (let kat in kategoriMap) {
-let p = totalPengeluaranGabungan > 0 ? ((kategoriMap[kat] / totalPengeluaranGabungan) * 100).toFixed(1) : 0;
-katHTML += `<div>
-<div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;">
-<span>${kat}</span><span>${formatRupiah(kategoriMap[kat])} (${p}%)</span>
-</div>
-<div style="width: 100%; background: var(--bg-input); height: 8px; border-radius: 4px; overflow: hidden;">
-<div style="width: ${p}%; background: var(--accent-blue); height: 100%;"></div>
-</div>
-</div>`;
+let katHTML = '';
+for (let cat in kategoriMap) {
+let val = kategoriMap[cat];
+let pct = totalPengeluaranGabungan > 0 ? ((val / totalPengeluaranGabungan) * 100).toFixed(1) : 0;
+katHTML += `<div><div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;"><span><b>${cat}</b> (${pct}%)</span><span class="txt-keluar">${formatRupiah(val)}</span></div><div style="width: 100%; background: var(--bg-input); height: 8px; border-radius: 4px; overflow: hidden;"><div style="width: ${pct}%; background: var(--accent-red); height: 100%;"></div></div></div>`;
 }
-katContainer.innerHTML = katHTML || '<p style="font-size:13px; color:var(--text-muted);">Tidak ada pengeluaran pada bulan ini.</p>';
+katContainer.innerHTML = katHTML;
+}
 }
 
-// --- TARGET TABUNGAN ---
 function tambahTarget() {
 let nama = document.getElementById('targetNama').value.trim();
 let nominal = parseFloat(document.getElementById('targetNominal').value) || 0;
 let terkumpul = parseFloat(document.getElementById('targetTerkumpul').value) || 0;
 let deadline = document.getElementById('targetDeadline').value;
-
-if (!nama || nominal <= 0) {
-alert('Nama target dan nominal wajib diisi!');
-return;
-}
-
+if (!nama || nominal <= 0) { alert('Nama target dan nominal wajib diisi!'); return; }
 db.target.push({ nama, nominal, terkumpul, deadline });
 saveDB();
 renderTarget();
@@ -843,41 +700,47 @@ document.getElementById('targetNama').value = '';
 document.getElementById('targetNominal').value = '';
 document.getElementById('targetTerkumpul').value = '';
 document.getElementById('targetDeadline').value = '';
-alert('Target tabungan berhasil ditambahkan!');
+alert('Target tabungan berhasil disimpan & diamankan!');
 }
 
 function renderTarget() {
 let container = document.getElementById('targetContainer');
 let html = '';
-db.target.forEach((tg, idx) => {
-let percent = tg.nominal > 0 ? Math.min(100, ((tg.terkumpul / tg.nominal) * 100)).toFixed(1) : 0;
-html += `<div style="background: var(--bg-input); padding: 16px; border-radius: 8px; border: 1px solid var(--border-color);">
-<div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-<strong>${tg.nama} (Deadline: ${tg.deadline || '-'})</strong>
-<span style="color: var(--accent-gold); font-weight: 700;">${percent}%</span>
-</div>
-<div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--text-muted); margin-bottom: 8px;">
-<span>Terkumpul: ${formatRupiah(tg.terkumpul)}</span>
-<span>Target: ${formatRupiah(tg.nominal)}</span>
-</div>
-<div style="width: 100%; background: var(--border-color); height: 10px; border-radius: 5px; overflow: hidden;">
-<div style="width: ${percent}%; background: var(--accent-green); height: 100%;"></div>
-</div>
-<div style="margin-top: 10px; text-align: right;">
-<button class="btn btn-red btn-sm" onclick="db.target.splice(${idx},1); saveDB(); renderTarget();">Hapus Target</button>
-</div>
-</div>`;
+db.target.forEach((t, idx) => {
+let pct = t.nominal > 0 ? Math.min(100, ((t.terkumpul / t.nominal) * 100)).toFixed(1) : 0;
+html += `<div style="background: var(--bg-input); padding: 16px; border-radius: 10px; border: 1px solid var(--border-color);"><div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 13px;"><span><b>${t.nama}</b> (Deadline: ${t.deadline || '-'})</span><span><b>${formatRupiah(t.terkumpul)}</b> / ${formatRupiah(t.nominal)} (${pct}%)</span></div><div style="width: 100%; background: var(--border-color); height: 10px; border-radius: 5px; overflow: hidden; margin-bottom: 10px;"><div style="width: ${pct}%; background: var(--accent-green); height: 100%;"></div></div><div style="display: flex; justify-content: flex-end; gap: 8px;"><button class="btn btn-green btn-sm" onclick="tambahProgressTarget(${idx})">+ Tambah Dana</button><button class="btn btn-red btn-sm" onclick="hapusTarget(${idx})">Hapus</button></div></div>`;
 });
-container.innerHTML = html || '<p style="font-size:13px; color:var(--text-muted);">Belum ada target tabungan.</p>';
+container.innerHTML = html || '<p style="font-size: 13px; color: var(--text-muted);">Belum ada target tabungan aktif.</p>';
 }
 
-// --- BACKUP & EXPORT JSON/CSV ---
+function tambahProgressTarget(idx) {
+let tambah = prompt('Masukkan jumlah nominal tabungan yang ingin ditambahkan:');
+if (tambah && !isNaN(tambah)) { db.target[idx].terkumpul += parseFloat(tambah); saveDB(); renderTarget(); }
+}
+
+function hapusTarget(idx) {
+if (confirm('Hapus target tabungan ini?')) { db.target.splice(idx, 1); saveDB(); renderTarget(); }
+}
+
 function downloadJSON() {
-let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(db, null, 2));
+let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(db));
 let dlAnchor = document.createElement('a');
 dlAnchor.setAttribute("href", dataStr);
-dlAnchor.setAttribute("download", "Backup_DashboardMaspeww.json");
+dlAnchor.setAttribute("download", "backup_maspeww_finance.json");
+document.body.appendChild(dlAnchor);
 dlAnchor.click();
+dlAnchor.remove();
+}
+
+function autoBackupJSON() {
+let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(db));
+let dlAnchor = document.createElement('a');
+dlAnchor.setAttribute("href", dataStr);
+dlAnchor.setAttribute("download", "backup_maspeww_finance.json");
+document.body.appendChild(dlAnchor);
+dlAnchor.style.display = 'none';
+dlAnchor.click();
+dlAnchor.remove();
 }
 
 function restoreJSON(event) {
@@ -886,32 +749,31 @@ if (!file) return;
 let reader = new FileReader();
 reader.onload = function(e) {
 try {
-db = JSON.parse(e.target.result);
+let parsed = JSON.parse(e.target.result);
+if (parsed.rekening && parsed.transaksi) {
+db = parsed;
 saveDB();
 renderAll();
-alert('Data berhasil direstore secara permanen!');
-} catch(err) {
-alert('File JSON tidak valid!');
-}
+alert('Data berhasil dipulihkan dengan sukses!');
+} else { alert('Format file JSON tidak valid!'); }
+} catch (err) { alert('Gagal membaca file JSON.'); }
 };
 reader.readAsText(file);
 }
 
 function exportCSV() {
-if (db.transaksi.length === 0) {
-alert('Tidak ada data transaksi untuk diexport!');
-return;
-}
-let csv = "Tanggal,Rekening,Jenis,Kategori,Keterangan,Nominal,Gram Emas\n";
+let csv = 'Tanggal,Rekening,Jenis,Kategori,Keterangan,Nominal,Gram\n';
 db.transaksi.forEach(t => {
-csv += `${t.tanggal},"${t.rekeningNama}",${t.jenis},${t.kategori},"${t.keterangan}",${t.nominal},${t.gram || 0}\n`;
+csv += `"${t.tanggal}","${t.rekeningNama}","${t.jenis}","${t.kategori}","${t.keterangan}",${t.nominal},${t.gram || 0}\n`;
 });
 let blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
 let url = URL.createObjectURL(blob);
 let a = document.createElement('a');
 a.href = url;
-a.download = 'Mutasi_Keuangan_Maspeww.csv';
+a.download = 'mutasi_transaksi_maspeww.csv';
+document.body.appendChild(a);
 a.click();
+a.remove();
 }
 </script>
 </body>
