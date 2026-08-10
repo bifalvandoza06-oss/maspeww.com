@@ -20,7 +20,7 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
 
-/* BACKGROUND UTAMA HALAMAN DALAM (Disesuaikan agar foto terlihat utuh) */
+/* BACKGROUND UTAMA HALAMAN DALAM */
 body { 
 background: #07090e url('https://lh3.googleusercontent.com/d/1QBsCDs2_BQtPZjKECk0_F_SrR6Qi9-F1'); 
 background-size: contain;
@@ -34,7 +34,7 @@ display: flex;
 font-weight: 500; 
 }
 
-/* BACKGROUND HALAMAN LOGIN (Disesuaikan agar foto terlihat utuh) */
+/* BACKGROUND HALAMAN LOGIN */
 #loginWrapper {
 position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
 background: #07090e url('https://lh3.googleusercontent.com/d/1QBsCDs2_BQtPZjKECk0_F_SrR6Qi9-F1');
@@ -634,7 +634,8 @@ else if (t.jenis === 'BUY GOLD') tBuyGoldBulanIni += t.nominal;
 document.getElementById('dashMasuk').innerText = formatRupiah(tMasukBulanIni);
 document.getElementById('dashKeluar').innerText = formatRupiah(tKeluarBulanIni);
 document.getElementById('dashTabungan').innerText = `${totalGramEmas.toFixed(2)} Gram (${formatRupiah(tBuyGoldBulanIni)})`;
-document.getElementById('dashSisa').innerText = formatRupiah(tMasukBulanIni - (tKeluarBulanIni + tBuyGoldBulanIni));
+// Sisa Uang Bulan Ini disamakan langsung dengan Pemasukan Bulan Ini
+document.getElementById('dashSisa').innerText = formatRupiah(tMasukBulanIni);
 
 renderTabelMutasi('dashTableBody', true);
 renderTransaksi();
@@ -684,7 +685,8 @@ else if (tr.jenis === 'BUY GOLD') { totalG += tr.nominal; kategoriMap['BUY GOLD'
 document.getElementById('lapTotalMasuk').innerText = formatRupiah(totalM);
 document.getElementById('lapTotalKeluar').innerText = formatRupiah(totalK);
 document.getElementById('lapTotalTabungan').innerText = formatRupiah(totalG);
-document.getElementById('lapSisaUang').innerText = formatRupiah(totalM - (totalK + totalG));
+// Sisa Uang Laporan Bulanan juga disamakan langsung dengan Total Pemasukan
+document.getElementById('lapSisaUang').innerText = formatRupiah(totalM);
 
 let maxVal = Math.max(totalM, totalK, totalG, 1);
 document.getElementById('barChartMasuk').style.height = Math.round((totalM / maxVal) * 100) + '%';
