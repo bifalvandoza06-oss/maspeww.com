@@ -241,6 +241,36 @@ th { background: var(--bg-input); color: var(--text-muted); font-weight: 700; te
   width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color);
   background: var(--bg-input); color: var(--text-main); font-size: 13px; outline: none; font-weight: 600;
 }
+
+/* BITCOIN / INVESTASI */
+.btc-price-card {
+  background: linear-gradient(135deg, rgba(37,99,235,0.22), rgba(217,119,6,0.18));
+  border: 1px solid rgba(217,119,6,0.35);
+  border-radius: 14px; padding: 22px; margin-bottom: 20px;
+}
+.btc-price-row { display:flex; justify-content:space-between; align-items:center; gap:15px; flex-wrap:wrap; }
+.btc-symbol { font-size: 12px; color: var(--text-muted); text-transform:uppercase; font-weight:800; letter-spacing:1px; }
+.btc-live-price { font-size: 26px; font-weight:900; color:var(--accent-gold); margin-top:4px; }
+.btc-updated { font-size:10px; color:var(--text-muted); margin-top:4px; }
+.btc-stat-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:20px; }
+.btc-stat { background:var(--bg-card); border:1px solid var(--border-color); border-radius:12px; padding:16px; }
+.btc-stat p { font-size:10px; color:var(--text-muted); text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.btc-stat h3 { font-size:15px; font-weight:900; color:var(--text-main); }
+.btc-profit { color:var(--accent-green) !important; }
+.btc-loss { color:var(--accent-red) !important; }
+.btc-mini { font-size:11px; color:var(--text-muted); margin-top:4px; }
+.btc-form-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:16px; }
+.btc-note { font-size:11px; color:var(--text-muted); margin-top:10px; line-height:1.5; }
+@media (max-width: 1100px) and (min-width: 768px) { .btc-stat-grid { grid-template-columns:repeat(2,1fr); } .btc-form-grid { grid-template-columns:repeat(2,1fr); } }
+@media (max-width: 767px) {
+  .btc-stat-grid { grid-template-columns:1fr 1fr; gap:8px; }
+  .btc-stat { padding:11px; }
+  .btc-stat h3 { font-size:12px; }
+  .btc-stat p { font-size:8px; }
+  .btc-live-price { font-size:20px; }
+  .btc-form-grid { display:block; }
+}
+
 </style>
 </head>
 <body>
@@ -290,6 +320,7 @@ th { background: var(--bg-input); color: var(--text-muted); font-weight: 700; te
         <div class="nav-item" onclick="switchTab('transaksi', this)">💳 Catat Transaksi</div>
         <div class="nav-item" onclick="switchTab('laporan', this)">📈 Laporan Bulanan</div>
         <div class="nav-item" onclick="switchTab('tabungan', this)">🎯 Target Tabungan</div>
+        <div class="nav-item" onclick="switchTab('bitcoin', this)">₿ Bitcoin / Investasi</div>
         <div class="nav-item" onclick="switchTab('backup', this)">💾 Backup & Restore</div>
       </div>
       <div class="user-profile">
@@ -455,6 +486,48 @@ th { background: var(--bg-input); color: var(--text-muted); font-weight: 700; te
           <div class="panel">
             <div class="panel-header"><h3>Ringkasan Kategori Pengeluaran</h3></div>
             <div id="kategoriSummaryContainer" style="display: flex; flex-direction: column; gap: 10px;"></div>
+          </div>
+        </div>
+
+
+        <div id="tab-bitcoin" class="tab-content">
+          <div class="btc-price-card">
+            <div class="btc-price-row">
+              <div>
+                <div class="btc-symbol">BTC / IDR • INDODAX</div>
+                <div id="btcCurrentPrice" class="btc-live-price">Rp 0</div>
+                <div id="btcUpdatedAt" class="btc-updated">Belum mengambil harga pasar.</div>
+              </div>
+              <button class="btn btn-blue" onclick="fetchBTCPrice(true)">↻ Refresh Harga</button>
+            </div>
+          </div>
+
+          <div class="btc-stat-grid">
+            <div class="btc-stat"><p>Total Modal</p><h3 id="btcTotalModal">Rp 0</h3></div>
+            <div class="btc-stat"><p>Total BTC</p><h3 id="btcTotalCoin">0 BTC</h3></div>
+            <div class="btc-stat"><p>Harga Rata-rata</p><h3 id="btcAvgPrice">Rp 0</h3></div>
+            <div class="btc-stat"><p>Nilai Aset Sekarang</p><h3 id="btcCurrentValue">Rp 0</h3></div>
+            <div class="btc-stat"><p>Untung / Rugi</p><h3 id="btcProfitLoss">Rp 0</h3><div id="btcProfitPct" class="btc-mini">0%</div></div>
+            <div class="btc-stat"><p>Perubahan Harga</p><h3 id="btcPriceChange">Rp 0</h3><div id="btcPriceChangePct" class="btc-mini">0%</div></div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header"><h3>Tambah Pembelian BTC</h3></div>
+            <div class="btc-form-grid">
+              <div class="input-group"><label>Tanggal Pembelian</label><input type="date" id="btcBuyDate"></div>
+              <div class="input-group"><label>Modal Pembelian (Rp)</label><input type="number" id="btcBuyAmount" placeholder="10000000" min="0"></div>
+              <div class="input-group"><label>Harga BTC Saat Beli (Rp)</label><input type="number" id="btcBuyPrice" placeholder="Contoh: 1400000000" min="0"></div>
+            </div>
+            <button class="btn btn-blue" onclick="addBTCBuy()">Simpan Pembelian BTC</button>
+            <p class="btc-note">Jumlah BTC dihitung otomatis dari modal ÷ harga beli. Harga pasar saat ini diambil dari Public API BTC/IDR INDODAX. Fitur ini hanya membaca harga pasar, tidak melakukan order.</p>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header"><h3>Riwayat Pembelian BTC</h3></div>
+            <table>
+              <thead><tr><th>Tanggal</th><th>Modal</th><th>Harga Beli</th><th>Jumlah BTC</th><th class="text-right">Aksi</th></tr></thead>
+              <tbody id="btcPurchaseTableBody"></tbody>
+            </table>
           </div>
         </div>
 
@@ -651,6 +724,36 @@ th { background: var(--bg-input); color: var(--text-muted); font-weight: 700; te
         </div>
       </div>
 
+
+      <div id="mb-tab-bitcoin" class="mb-tab-content">
+        <div class="mb-card-panel">
+          <div class="mb-card-title"><span>₿ Bitcoin / Investasi</span><button class="btn btn-blue btn-sm" onclick="fetchBTCPrice(true)">↻ Refresh</button></div>
+          <div class="btc-price-card" style="margin-bottom:12px; padding:14px;">
+            <div class="btc-symbol">BTC / IDR • INDODAX</div>
+            <div id="mbBtcCurrentPrice" class="btc-live-price">Rp 0</div>
+            <div id="mbBtcUpdatedAt" class="btc-updated">Belum mengambil harga pasar.</div>
+          </div>
+          <div class="btc-stat-grid">
+            <div class="btc-stat"><p>Total Modal</p><h3 id="mbBtcTotalModal">Rp 0</h3></div>
+            <div class="btc-stat"><p>Total BTC</p><h3 id="mbBtcTotalCoin">0 BTC</h3></div>
+            <div class="btc-stat"><p>Harga Rata-rata</p><h3 id="mbBtcAvgPrice">Rp 0</h3></div>
+            <div class="btc-stat"><p>Nilai Sekarang</p><h3 id="mbBtcCurrentValue">Rp 0</h3></div>
+            <div class="btc-stat"><p>Untung / Rugi</p><h3 id="mbBtcProfitLoss">Rp 0</h3><div id="mbBtcProfitPct" class="btc-mini">0%</div></div>
+          </div>
+        </div>
+        <div class="mb-card-panel">
+          <div class="mb-card-title"><span>Tambah Pembelian BTC</span></div>
+          <div class="mb-form-group"><label>Tanggal Pembelian</label><input type="date" id="mbBtcBuyDate"></div>
+          <div class="mb-form-group"><label>Modal Pembelian (Rp)</label><input type="number" id="mbBtcBuyAmount" placeholder="10000000"></div>
+          <div class="mb-form-group"><label>Harga BTC Saat Beli (Rp)</label><input type="number" id="mbBtcBuyPrice" placeholder="1400000000"></div>
+          <button class="btn btn-blue" style="width:100%;" onclick="mbAddBTCBuy()">Simpan Pembelian BTC</button>
+        </div>
+        <div class="mb-card-panel">
+          <div class="mb-card-title"><span>Riwayat Pembelian</span></div>
+          <div id="mbBtcPurchaseList"></div>
+        </div>
+      </div>
+
       <!-- LAINNYA / TARGET & BACKUP TAB HP -->
       <div id="mb-tab-lainnya" class="mb-tab-content">
         <div class="mb-card-panel">
@@ -664,6 +767,12 @@ th { background: var(--bg-input); color: var(--text-muted); font-weight: 700; te
         <div class="mb-card-panel">
           <div class="mb-card-title"><span>Progress Tabungan</span></div>
           <div id="mbTargetContainer" style="display: flex; flex-direction: column; gap: 10px;"></div>
+        </div>
+
+        <div class="mb-card-panel">
+          <div class="mb-card-title"><span>₿ Bitcoin / Investasi</span></div>
+          <p style="font-size:11px; color:var(--text-muted); margin-bottom:10px;">Pantau harga BTC/IDR dan profit investasi dari data pembelian yang bosku masukkan.</p>
+          <button class="btn btn-blue" style="width:100%;" onclick="mbSwitchMenu('bitcoin', null)">Buka Bitcoin / Investasi</button>
         </div>
         <div class="mb-card-panel">
           <div class="mb-card-title"><span>Backup & Restore Data</span></div>
@@ -704,8 +813,12 @@ th { background: var(--bg-input); color: var(--text-muted); font-weight: 700; te
 let db = JSON.parse(localStorage.getItem('maspeww_db_v5')) || {
 rekening: [{ id: 1, nama: 'BCA', holder: 'Rekening Utama', nomor: '1234561828', saldo: 15000000 }],
 transaksi: [],
-target: [{ nama: 'Dana Darurat', nominal: 10000000, terkumpul: 4000000, deadline: '2026-12-31' }]
+target: [{ nama: 'Dana Darurat', nominal: 10000000, terkumpul: 4000000, deadline: '2026-12-31' }],
+btc: { purchases: [], currentPrice: 0, updatedAt: null }
 };
+if (!db.btc) db.btc = { purchases: [], currentPrice: 0, updatedAt: null };
+if (!Array.isArray(db.btc.purchases)) db.btc.purchases = [];
+let btcRefreshTimer = null;
 
 if (sessionStorage.getItem('maspeww_logged') === 'true') {
 bukaAplikasi();
@@ -733,9 +846,13 @@ document.getElementById('loginWrapper').style.display = 'none';
 document.getElementById('appWrapper').style.display = 'block';
 document.getElementById('trTgl').valueAsDate = new Date();
 document.getElementById('mbTrTgl').valueAsDate = new Date();
+document.getElementById('btcBuyDate').valueAsDate = new Date();
+document.getElementById('mbBtcBuyDate').valueAsDate = new Date();
 updateKategoriOptions();
 mbUpdateKategoriOptions();
 renderAll();
+fetchBTCPrice();
+if (!btcRefreshTimer) btcRefreshTimer = setInterval(() => fetchBTCPrice(), 60000);
 }
 
 function switchTab(tabId, el) {
@@ -746,7 +863,7 @@ el.classList.add('active');
 let titles = {
 dashboard: 'Dashboard Keuangan', rekening: 'Manajemen Data Rekening',
 transaksi: 'Pencatatan Mutasi Transaksi', laporan: 'Laporan Keuangan Bulanan',
-tabungan: 'Target Tabungan Pribadi', backup: 'Backup & Restore Data'
+tabungan: 'Target Tabungan Pribadi', bitcoin: 'Bitcoin / Investasi', backup: 'Backup & Restore Data'
 };
 document.getElementById('pageTitle').innerText = titles[tabId];
 renderAll();
@@ -1000,6 +1117,7 @@ renderMobileTransaksi();
 renderLaporanDesktop();
 renderMobileLaporan();
 renderTargetAll();
+renderBTC();
 }
 
 function renderTabelMutasiDesktop(elementId, limit5 = false) {
@@ -1131,6 +1249,121 @@ let pct = tKeluar > 0 ? (katMap[kat] / tKeluar * 100).toFixed(1) : 0;
 katHTML += `<div style="display:flex; justify-content:space-between; font-size:11px; background:var(--bg-input); padding:8px; border-radius:6px;"><span><b>${kat}</b> (${pct}%)</span><span>${formatRupiah(katMap[kat])}</span></div>`;
 }
 katContainer.innerHTML = katHTML || '<p style="color:var(--text-muted); font-size:11px;">Tidak ada pengeluaran.</p>';
+}
+
+
+function formatBTC(angka) {
+  return Number(angka || 0).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 8 }) + ' BTC';
+}
+
+function getBTCStats() {
+  let totalModal = 0, totalCoin = 0;
+  db.btc.purchases.forEach(p => {
+    totalModal += Number(p.amount) || 0;
+    totalCoin += Number(p.coin) || 0;
+  });
+  let avgPrice = totalCoin > 0 ? totalModal / totalCoin : 0;
+  let currentPrice = Number(db.btc.currentPrice) || 0;
+  let currentValue = totalCoin * currentPrice;
+  let profitLoss = currentValue - totalModal;
+  let profitPct = totalModal > 0 ? (profitLoss / totalModal) * 100 : 0;
+  let priceChange = currentPrice - avgPrice;
+  let priceChangePct = avgPrice > 0 ? (priceChange / avgPrice) * 100 : 0;
+  return { totalModal, totalCoin, avgPrice, currentPrice, currentValue, profitLoss, profitPct, priceChange, priceChangePct };
+}
+
+async function fetchBTCPrice(showAlert = false) {
+  const endpoint = 'https://indodax.com/api/btc_idr/ticker';
+  try {
+    const response = await fetch(endpoint, { cache: 'no-store' });
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+    const data = await response.json();
+    const last = Number(data?.ticker?.last);
+    if (!Number.isFinite(last) || last <= 0) throw new Error('Harga BTC tidak valid');
+    db.btc.currentPrice = last;
+    db.btc.updatedAt = new Date().toISOString();
+    saveDB();
+    renderBTC();
+    if (showAlert) alert('Harga BTC/IDR berhasil diperbarui dari INDODAX.');
+  } catch (err) {
+    renderBTC();
+    if (showAlert) alert('Harga BTC belum dapat diperbarui. Periksa koneksi internet atau coba lagi.');
+  }
+}
+
+function addBTCBuy() {
+  let date = document.getElementById('btcBuyDate').value || new Date().toISOString().slice(0,10);
+  let amount = parseFloat(document.getElementById('btcBuyAmount').value) || 0;
+  let price = parseFloat(document.getElementById('btcBuyPrice').value) || 0;
+  if (amount <= 0 || price <= 0) { alert('Modal pembelian dan harga BTC wajib diisi.'); return; }
+  let coin = amount / price;
+  db.btc.purchases.push({ id: Date.now(), date, amount, price, coin });
+  saveDB();
+  renderBTC();
+  document.getElementById('btcBuyAmount').value = '';
+  document.getElementById('btcBuyPrice').value = '';
+  alert('Pembelian BTC berhasil disimpan.');
+}
+
+function mbAddBTCBuy() {
+  let date = document.getElementById('mbBtcBuyDate').value || new Date().toISOString().slice(0,10);
+  let amount = parseFloat(document.getElementById('mbBtcBuyAmount').value) || 0;
+  let price = parseFloat(document.getElementById('mbBtcBuyPrice').value) || 0;
+  if (amount <= 0 || price <= 0) { alert('Modal pembelian dan harga BTC wajib diisi.'); return; }
+  let coin = amount / price;
+  db.btc.purchases.push({ id: Date.now(), date, amount, price, coin });
+  saveDB();
+  renderBTC();
+  document.getElementById('mbBtcBuyAmount').value = '';
+  document.getElementById('mbBtcBuyPrice').value = '';
+  alert('Pembelian BTC berhasil disimpan.');
+}
+
+function hapusBTCBuy(id) {
+  if (!confirm('Hapus catatan pembelian BTC ini?')) return;
+  db.btc.purchases = db.btc.purchases.filter(p => p.id !== id);
+  saveDB();
+  renderBTC();
+}
+
+function renderBTC() {
+  if (!db.btc) db.btc = { purchases: [], currentPrice: 0, updatedAt: null };
+  const s = getBTCStats();
+  const money = n => formatRupiah(n);
+  const cls = s.profitLoss >= 0 ? 'btc-profit' : 'btc-loss';
+  const sign = s.profitLoss > 0 ? '+' : '';
+  const updated = db.btc.updatedAt ? new Date(db.btc.updatedAt).toLocaleString('id-ID') : 'Belum mengambil harga pasar.';
+
+  const set = (id, value, className) => { const el = document.getElementById(id); if (el) { el.innerText = value; if (className) el.className = className; } };
+  set('btcCurrentPrice', money(s.currentPrice));
+  set('btcUpdatedAt', 'Update: ' + updated);
+  set('btcTotalModal', money(s.totalModal));
+  set('btcTotalCoin', formatBTC(s.totalCoin));
+  set('btcAvgPrice', money(s.avgPrice));
+  set('btcCurrentValue', money(s.currentValue));
+  set('btcProfitLoss', sign + money(s.profitLoss), cls);
+  set('btcProfitPct', sign + s.profitPct.toFixed(2) + '%', 'btc-mini ' + cls);
+  set('btcPriceChange', (s.priceChange >= 0 ? '+' : '') + money(s.priceChange));
+  set('btcPriceChangePct', (s.priceChangePct >= 0 ? '+' : '') + s.priceChangePct.toFixed(2) + '%');
+
+  set('mbBtcCurrentPrice', money(s.currentPrice));
+  set('mbBtcUpdatedAt', 'Update: ' + updated);
+  set('mbBtcTotalModal', money(s.totalModal));
+  set('mbBtcTotalCoin', formatBTC(s.totalCoin));
+  set('mbBtcAvgPrice', money(s.avgPrice));
+  set('mbBtcCurrentValue', money(s.currentValue));
+  set('mbBtcProfitLoss', sign + money(s.profitLoss), cls);
+  set('mbBtcProfitPct', sign + s.profitPct.toFixed(2) + '%', 'btc-mini ' + cls);
+
+  let rows = [...db.btc.purchases].sort((a,b) => new Date(b.date) - new Date(a.date));
+  const tbody = document.getElementById('btcPurchaseTableBody');
+  if (tbody) {
+    tbody.innerHTML = rows.map(p => `<tr><td>${p.date}</td><td>${money(p.amount)}</td><td>${money(p.price)}</td><td>${formatBTC(p.coin)}</td><td class="text-right"><button class="btn btn-red btn-sm" onclick="hapusBTCBuy(${p.id})">Hapus</button></td></tr>`).join('') || '<tr><td colspan="5" style="text-align:center;">Belum ada pembelian BTC.</td></tr>';
+  }
+  const list = document.getElementById('mbBtcPurchaseList');
+  if (list) {
+    list.innerHTML = rows.map(p => `<div class="mb-trx-item"><div class="mb-trx-desc"><h4>${p.date}</h4><p>Modal ${money(p.amount)} • Harga ${money(p.price)}</p><p>${formatBTC(p.coin)}</p></div><button class="btn btn-red btn-sm" onclick="hapusBTCBuy(${p.id})">Hapus</button></div>`).join('') || '<p style="font-size:11px;color:var(--text-muted);text-align:center;">Belum ada pembelian BTC.</p>';
+  }
 }
 
 function tambahTarget() {
