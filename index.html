@@ -1,3 +1,4 @@
+```
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -1273,7 +1274,7 @@ function getBTCStats() {
 }
 
 async function fetchBTCPrice(showAlert = false) {
-  const endpoint = 'https://indodax.com/api/btc_idr/ticker';
+  const endpoint = 'https://maspeww-btc.bipalvandoza99.workers.dev/';
   try {
     const response = await fetch(endpoint, { cache: 'no-store' });
     if (!response.ok) throw new Error('HTTP ' + response.status);
@@ -1287,7 +1288,7 @@ async function fetchBTCPrice(showAlert = false) {
     if (showAlert) alert('Harga BTC/IDR berhasil diperbarui dari INDODAX.');
   } catch (err) {
     renderBTC();
-    if (showAlert) alert('Harga BTC belum dapat diperbarui. Periksa koneksi internet atau coba lagi.');
+    if (showAlert) alert('Harga BTC belum berhasil diperbarui. Harga terakhir yang valid tetap digunakan.');
   }
 }
 
@@ -1465,3 +1466,4 @@ link.remove();
 </script>
 </body>
 </html>
+```
